@@ -7,7 +7,7 @@ use PDO;
 class ConnectionFactory
 {
     private static $config = [];
-    private static $db;
+    public static $db;
 
     public static function setConfig($file)
     {

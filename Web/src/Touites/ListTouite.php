@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace Iutnc\Sae;
+namespace Iutncy\Sae\Touites;
 
 class ListTouite
 {

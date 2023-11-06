@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Iutncy\Sae;
+namespace Iutncy\Sae\Touites;
+use Iutncy\Sae\User;
+
 class Touite {
     private string $texte;
     private string $date;

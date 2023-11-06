@@ -8,4 +8,10 @@ class User {
     public function getTouites(): array {
         return array();
     }
+    public function getEmail(): string {
+        return $this->email;
+    }
+    public function getPseudo(): string {
+        return $this->pseudo;
+    }
 }

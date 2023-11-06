@@ -1,6 +1,7 @@
 <?php
 
 namespace Iutncy\Sae\Dispatch;
+use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 
 class Dispatcher
@@ -17,6 +18,9 @@ class Dispatcher
     {
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
+            case 'connection':
+                $action = new ConnectionAction();
+                break;
             default:
                 $action = new DefaultAction();
                 break;

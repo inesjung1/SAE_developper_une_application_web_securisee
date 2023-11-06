@@ -1,6 +1,7 @@
 <?php
 
 namespace Iutncy\Sae\Dispatch;
+use \Iutncy\Sae\Action\DefaultAction;
 
 class Dispatcher
 {
@@ -17,7 +18,7 @@ class Dispatcher
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
             default:
-                $action = new \Iutncy\Sae\Action;
+                $action = new DefaultAction();
                 break;
         }
         $this->renderPage($action->execute());

@@ -1,0 +1,15 @@
+{
+    "name": "iutncy/sae",
+    "autoload": {
+        "psr-4": {
+            "Iutncy\\Sae\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "inesjung",
+            "email": "ines.jung9@etu.univ-lorraine.fr"
+        }
+    ],
+    "require": {}
+}

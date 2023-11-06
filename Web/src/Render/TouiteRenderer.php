@@ -14,7 +14,6 @@ class TouiteRenderer {
         $email = $user->getEmail();
         $content = $touite->getTexte();
         $date = $touite->getDate();
-        $date = $touite->getDate();
         $html = <<<HTML
         <div class="touite">
             <div class="touite-header">
@@ -24,7 +23,7 @@ class TouiteRenderer {
             </div>
             <div class="touite-content">$content</div>
         </div>
-HTML;
+        HTML;
         return $html;
     }
 }

@@ -11,5 +11,7 @@
             "email": "ines.jung9@etu.univ-lorraine.fr"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }

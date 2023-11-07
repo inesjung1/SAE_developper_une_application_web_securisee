@@ -23,7 +23,7 @@ class InscriptionAction extends Action {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $Auth = new Auth();
-            $Auth->register($email, $password);
+            $Auth->register($pseudo, $email, $password);
             $html = <<<HTML
                 <p>Vous êtes bien inscrit</p>
                 <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>

@@ -11,7 +11,7 @@ class Auth
         {
             ConnectionFactory::makeConnection();
             $bdd = ConnectionFactory::$db;
-            $requete = $bdd->prepare('SELECT * FROM user WHERE email = :email');
+            $requete = $bdd->prepare('SELECT * FROM Utilisateur WHERE AdresseEmail = :email');
             $requete->bindValue(':email', $email);
 
             $resultat = $requete->execute();
@@ -39,7 +39,7 @@ class Auth
 
 
 
-    public static function register(string $email,string $mdp) 
+    public static function register(string $pseudo, string $email,string $mdp)
         {
             
             
@@ -67,7 +67,7 @@ class Auth
 
 
             //vérification de l'unicité de l'email
-            $requete = $bdd->prepare('SELECT * FROM user WHERE email = :email');
+            $requete = $bdd->prepare('SELECT * FROM Utilisateur WHERE AdresseEmail = :email');
             $requete->bindValue(':email', $email);
             $resultat = $requete->execute();
             if ($resultat){
@@ -82,7 +82,7 @@ class Auth
             //hashage du mot de passe
 
             $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);
-            $requete = $bdd->prepare('INSERT INTO user (email, password) VALUES (:email, :password)');
+            $requete = $bdd->prepare('INSERT INTO Utilisateur (AdresseEmail, mdp, pseudo) VALUES (:email, :mdp, :pseudo)');
             $requete->bindValue(':email', $email);
             $requete->bindValue(':password', $passwordHash);
             $resultat = $requete->execute();

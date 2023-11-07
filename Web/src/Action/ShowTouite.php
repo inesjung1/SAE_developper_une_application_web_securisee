@@ -9,15 +9,15 @@ class ShowTouite extends Action{
     public function execute(): string {
         $html = '';
         $db = \Iutncy\Sae\Db\ConnectionFactory::makeConnection();
-        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY datePublication DESC";
+        $sql = "SELECT * FROM Touite";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $touites = $stmt->fetchAll();
         foreach ($touites as $touite) {
             $html .= '<div class="touite">';
-            $html .= '<p>' . $touite['PSEUDO'].'</p>';
-            $html .= '<p>' . $touite['Texte'] . "adae".'</p>';
+            $html .= '<p>' . $touite['Texte'] .'</p>';
             $html .= '<p>' . $touite['DatePublication'] .'</p>';
+            $html .= '<p>' . $touite['UtilisateurID'] .'</p>';
             $html .= '</div>';
         }
         return $html;

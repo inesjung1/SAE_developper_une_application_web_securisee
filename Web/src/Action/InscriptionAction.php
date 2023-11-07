@@ -8,6 +8,7 @@ class InscriptionAction extends Action {
     public function execute(): string {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                 <form action="index.php?action=inscription" method="post">
                     <label for="pseudo">Pseudo</label>
                     <input type="text" id="pseudo" name="pseudo" required>

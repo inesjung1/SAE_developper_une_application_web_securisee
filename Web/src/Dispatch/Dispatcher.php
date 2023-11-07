@@ -40,12 +40,10 @@ class Dispatcher
             <html>
             <head>
             <meta charset="UTF-8">
-            <title>Touite</title>
+            <title>Touiter</title>
             <link rel="stylesheet" href="./src/style.css">
             </head>
             <body>
-            <button onclick="window.location.href='index.php?action=DefaultAction'">Touite</button>
-            <br>
             $html
             </body>
             </head>

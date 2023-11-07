@@ -10,6 +10,7 @@ class RechercheAction extends Action {
         $listRecherche = new ListTouite();
         //$listRecherche->loadFromDb($recherche);
         $html = <<<HTML
+            <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
             <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
             <button class="btnInscription" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
             <form action="index.php?action=recherche" method="get">

@@ -1,48 +1,48 @@
 /*
-	Palette de couleurs :
-    darkgreen : 273C2C
-    dim grey : 626868
-    taupe grey : 939196
-    thistle : D3C1D2
-    pale purple : FFE2FE
+    fond clair : F6F7EB
+    light coral : E69597
+    light red : FF7477
+    eggplant : 553E4E
+    night : 0A090C
 */
 
-
 body{
-    background-color: #626868;
-}
-
-.default{
-    display: flex;
+    background-color: #F6F7EB;
 }
 
 button{
-    background-color: #939196;
+    background-color: #E69597;
     border-radius: 15px;
 }
 
 button:hover{
-    background-color: #D3C1D2;
-}
-
-button:active{
-    background-color: #FFE2FE;
+    background-color: #FF7477;
 }
 
 .entreeTexte{
-    background-color: #939196;
-    color: #FFE2FE;
+    background-color: #E69597;
+    color: black;
 }
 
 .entreeButton{
-    background-color: #939196;
+    background-color: #E69597;
     border-radius: 15px;
 }
 
 .entreeButton:hover{
-    background-color: #D3C1D2;
+    background-color: #FF7477;
 }
 
-.entreeButton:active{
-    background-color: #FFE2FE;
+nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 20%;
+    border-right: solid 1px black;
+    align-items: center;
+}
+
+.navi{
+    margin: 2%;
+    width: 50%;
 }

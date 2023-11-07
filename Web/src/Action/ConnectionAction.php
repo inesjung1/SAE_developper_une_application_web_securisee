@@ -23,7 +23,6 @@ public function __construct() {}
             if ($Auth->authentificate($email, $password)) {
                 $html = <<<HTML
                     <p>Vous êtes bien connecté</p>
-                    <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
                 HTML;
             } else {
                 $html = <<<HTML

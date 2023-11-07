@@ -18,10 +18,10 @@ class Auth
 
             if($resultat){
                 while($row = $requete->fetch()){
-                    $passwordHash = $row['password'];
+                    $passwordHash = $row['MDP'];
                     $verifier = password_verify($mdp, $passwordHash);
                     if($verifier){
-                        $user = new User($row['id'], $row['email']);
+                        $user = new User($row['AdresseEmail'], $row['PSEUDO'], $row['MDP']);
                         $_SESSION['user'] = serialize($user);
                         return true;
 

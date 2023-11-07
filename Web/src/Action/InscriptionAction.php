@@ -15,17 +15,26 @@ class InscriptionAction extends Action {
                     <input type="email" id="email" name="email" required>
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" required>
+                    <label for="Nom">Nom</label>
+                    <input type="text" id="Nom" name="Nom" required>
+                    <label for="Prenom">Prenom</label>
+                    <input type="text" id="Prenom" name="Prenom" required>
+                    
                     <input type="submit" value="Inscription">
+                    
                 </form>
             HTML;
         } else {
             $pseudo = $_POST['pseudo'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $nom = $_POST['Nom'];
+            $prenom = $_POST['Prenom'];
+            
             $Auth = new Auth();
-            if($Auth->register($pseudo, $email, $password)){
+            if($Auth->register($pseudo, $email, $password,$nom,$prenom)){
                 $html = <<<HTML
-                <p>Vous êtes bien inscrit</p>
+                <p>Vous êtes bien inscrit </p>
                 <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
             HTML;
             }else{

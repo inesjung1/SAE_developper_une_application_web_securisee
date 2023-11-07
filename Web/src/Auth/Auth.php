@@ -35,7 +35,7 @@ class Auth
 
 
 
-    public static function register(string $pseudo, string $email,string $mdp) : bool
+    public static function register(string $pseudo, string $email,string $mdp,string $nom,string $prenom) : bool
         {
             
             $isok = true;
@@ -87,7 +87,9 @@ class Auth
             
             if($isok){
                 $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);
-                $requete = $bdd->prepare('INSERT INTO Utilisateur (AdresseEmail, mdp, pseudo) VALUES (:email, :mdp, :pseudo)');
+                $requete = $bdd->prepare('INSERT INTO Utilisateur (Nom, Prenom, AdresseEmail, mdp, pseudo) VALUES (:nom, :prenom, :email, :mdp, :pseudo)');
+                $requete->bindValue(':nom', $nom);
+                $requete->bindValue(':prenom', $prenom);
                 $requete->bindValue(':email', $email);
                 $requete->bindValue(':mdp', $passwordHash);
                 $requete->bindValue(':pseudo', $pseudo);

@@ -6,7 +6,7 @@ use Iutncy\Sae\Db\ConnectionFactory;
 use Iutncy\Sae\Exception\AuthException;
 class Auth
 {
-
+    
     public static function authentificate(string $email, string $mdp) : bool
         {
             ConnectionFactory::makeConnection();
@@ -35,17 +35,23 @@ class Auth
 
 
 
-    public static function register(string $pseudo, string $email,string $mdp)
+    public static function register(string $pseudo, string $email,string $mdp,string $nom,string $prenom) : bool
         {
             
-            
+            $isok = true;
             ConnectionFactory::makeConnection();
             $bdd = ConnectionFactory::$db;
             //vérification de la longueur du mot de passe, pas de nettoyage car on affiche pas le mot de passe.
-            if (strlen($mdp) < 8) {
-                echo "Le mot de passe doit contenir au moins 8 caractères";
-                throw new AuthException("Le mot de passe doit contenir au moins 8 caractères");
-            }
+            
+                if (strlen($mdp) < 8) {
+                    echo "Le mot de passe est trop court !";
+                    $isok = $isok && false ;
+    
+                }
+            
+            
+            
+            
             
             
             
@@ -53,9 +59,10 @@ class Auth
             //vérification de la validité de l'email et nettoyage de l'email
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo "L'email n'est pas valide";
+                $isok = $isok && false;
                 throw new AuthException("L'email n'est pas valide");
             }
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
 
 
 
@@ -68,27 +75,32 @@ class Auth
             $resultat = $requete->execute();
             if ($resultat){
                 while($row = $requete->fetch()){
-                    if ($row['email'] == $email){
+                    if ($row['AdresseEmail'] == $email){
                         echo "L'email est déjà utilisé";
-                        throw new AuthException("L'email est déjà utilisé");
+                        $isok = $isok && false;
 
                     }
                 }
             }
             //hashage du mot de passe
 
-            $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);
-            $requete = $bdd->prepare('INSERT INTO Utilisateur (AdresseEmail, mdp, pseudo) VALUES (:email, :mdp, :pseudo)');
-            $requete->bindValue(':email', $email);
-            $requete->bindValue(':mdp', $passwordHash);
-            $requete->bindValue(':pseudo', $pseudo);
-            $resultat = $requete->execute();
-            //vérification de l'ajout de l'utilisateur
-            if ($resultat){
-                echo "L'utilisateur a bien été ajouté";
+            
+            if($isok){
+                $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);
+                $requete = $bdd->prepare('INSERT INTO Utilisateur (Nom, Prenom, AdresseEmail, mdp, pseudo) VALUES (:nom, :prenom, :email, :mdp, :pseudo)');
+                $requete->bindValue(':nom', $nom);
+                $requete->bindValue(':prenom', $prenom);
+                $requete->bindValue(':email', $email);
+                $requete->bindValue(':mdp', $passwordHash);
+                $requete->bindValue(':pseudo', $pseudo);
+                $resultat = $requete->execute();
+                //vérification de l'ajout de l'utilisateur
+                if ($resultat === false){
+                    $isok = $isok && false;
+                    }
+                  
             }
-            else{
-                echo "L'utilisateur n'a pas pu être ajouté";
-            }    
+            return $isok;   
+            
     }
 }

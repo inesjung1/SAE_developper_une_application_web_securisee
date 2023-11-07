@@ -3,7 +3,7 @@
 namespace Iutncy\Sae\Dispatch;
 use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
-
+use \Iutncy\Sae\Action\InscriptionAction;
 class Dispatcher
 {
     private $action;
@@ -21,6 +21,9 @@ class Dispatcher
             case 'connection':
                 $action = new ConnectionAction();
                 break;
+            case 'inscription':
+                $action = new InscriptionAction();
+                break;
             default:
                 $action = new DefaultAction();
                 break;
@@ -30,13 +33,15 @@ class Dispatcher
 
     private function renderPage(string $html): void
     {
-        echo '<html>';
-        echo '<head>';
-        echo '<title>Touite</title>';
-        echo '</head>';
-        echo '<body>';
+        echo "<html>";
+        echo "<head>";
+        echo "<title>Touite</title>";
+        echo "</head>";
+        echo "<body>";
+        echo "<button><a href='index.php'>Touiter</a></button>";
+        echo "<br>";
         echo $html;
-        echo '</body>';
-        echo '</html>';
+        echo "</body>";
+        echo "</html>";
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Iutncy\Sae\Dispatch;
 use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;

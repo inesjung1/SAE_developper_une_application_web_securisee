@@ -5,6 +5,11 @@ class User {
     private string $email;
     private string $pseudo;
     private string $password;
+    public function __construct(string $email, string $pseudo, string $password) {
+        $this->email = $email;
+        $this->pseudo = $pseudo;
+        $this->password = $password;
+    }
     public function getTouites(): array {
         return array();
     }

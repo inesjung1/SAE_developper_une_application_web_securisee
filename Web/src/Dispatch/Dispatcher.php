@@ -4,6 +4,7 @@ namespace Iutncy\Sae\Dispatch;
 use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 use \Iutncy\Sae\Action\InscriptionAction;
+use \Iutncy\Sae\Action\ShowTouite;
 class Dispatcher
 {
     private $action;
@@ -23,6 +24,9 @@ class Dispatcher
                 break;
             case 'inscription':
                 $action = new InscriptionAction();
+                break;
+            case 'affichertouite':
+                $action = new ShowTouite();
                 break;
             default:
                 $action = new DefaultAction();

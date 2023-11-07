@@ -1,7 +1,6 @@
 <?php
 
 namespace Iutncy\Sae\Tag;
-use http\Exception\InvalidArgumentException;
 use Iutncy\Sae\Exception\InvalideName;
 
 class Tag{

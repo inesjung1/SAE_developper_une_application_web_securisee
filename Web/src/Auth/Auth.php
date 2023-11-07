@@ -84,6 +84,21 @@ class Auth
             }
             //hashage du mot de passe
 
+            //vérification de l'unicité du pseudo
+            $requete = $bdd->prepare('SELECT * FROM Utilisateur WHERE PSEUDO = :pseudo');
+            $requete->bindValue(':pseudo', $pseudo);
+            $resultat = $requete->execute();
+            if ($resultat){
+                while($row = $requete->fetch()){
+                    if ($row['PSEUDO'] == $pseudo){
+                        echo "Le pseudo est déjà utilisé";
+                        $isok = $isok && false;
+
+                    }
+                }
+            }
+
+
             
             if($isok){
                 $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);

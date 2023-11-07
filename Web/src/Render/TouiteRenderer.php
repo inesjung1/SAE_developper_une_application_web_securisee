@@ -21,7 +21,7 @@ class TouiteRenderer implements Renderer{
                 $html = <<<HTML
                 <div class="touite">
                     <div class="touite-header">
-                        <div class="touite-pseudo">$pseudo</div>
+                        <div class="touite-pseudo"><a class="user" href="index.php?action=ShowProfil">$pseudo</div></a>
                         <div class="touite-email">$email</div>
                         <div class="touite-date">$date</div>
                     </div>

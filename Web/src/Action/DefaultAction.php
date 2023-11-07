@@ -54,7 +54,7 @@ class DefaultAction extends Action {
             $t = new Touite($texte, $date, $user, $litag);
             $liTouite -> addTouite($t);
             $affiche = new TouiteRenderer($t);
-            $html .= $affiche->render();
+            $html .= $affiche->render(2);
         }
         //$affiche = new ListTouiteRenderer($liTouite);
         //$html .= $affiche->render();

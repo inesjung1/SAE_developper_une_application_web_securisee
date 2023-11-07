@@ -1,14 +1,16 @@
 <?php
 
 namespace Iutncy\Sae\Auth;
-
+use Iutncy\Sae\User\User;
+use Iutncy\Sae\Db\ConnectionFactory;
+use Iutncy\Sae\Exception\AuthException;
 class Auth
 {
 
-    public static function authentificate(string $email, string $mdp) : boolean
+    public static function authentificate(string $email, string $mdp) : bool
         {
-            \Iutncy\Sae\Db\ConnectionFactory::makeConnection();
-            $bdd = \Iutncy\Sae\Db\ConnectionFactory::$db;
+            ConnectionFactory::makeConnection();
+            $bdd = ConnectionFactory::$db;
             $requete = $bdd->prepare('SELECT * FROM user WHERE email = :email');
             $requete->bindValue(':email', $email);
 
@@ -19,19 +21,18 @@ class Auth
                     $passwordHash = $row['password'];
                     $verifier = password_verify($mdp, $passwordHash);
                     if($verifier){
-                        $user = new \Iutncy\Sae\User($row['id'], $row['email']);
+                        $user = new User($row['id'], $row['email']);
                         $_SESSION['user'] = serialize($user);
                         return true;
 
                     }
                     else{
                         echo "Le mot de passe est incorrect";
-                        throw new \Iutncy\Sae\Exception\AuthException("Le mot de passe est incorrect");
+                        throw new AuthException("Le mot de passe est incorrect");
                     }
                 }
             }
-            
-        
+            return false;
         }
 
 
@@ -42,12 +43,12 @@ class Auth
         {
             
             
-            Iutncy\Sae\Db\ConnectionFactory::makeConnection();
-            $bdd = \Iutncy\Sae\Db\ConnectionFactory::$db;
+            ConnectionFactory::makeConnection();
+            $bdd = ConnectionFactory::$db;
             //vérification de la longueur du mot de passe, pas de nettoyage car on affiche pas le mot de passe.
             if (strlen($mdp) < 8) {
                 echo "Le mot de passe doit contenir au moins 8 caractères";
-                throw new \Iutncy\Sae\Exception\AuthException("Le mot de passe doit contenir au moins 8 caractères");
+                throw new AuthException("Le mot de passe doit contenir au moins 8 caractères");
             }
             
             
@@ -56,7 +57,7 @@ class Auth
             //vérification de la validité de l'email et nettoyage de l'email
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo "L'email n'est pas valide";
-                throw new \Iutncy\Sae\Exception\AuthException("L'email n'est pas valide");
+                throw new AuthException("L'email n'est pas valide");
             }
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
@@ -73,7 +74,7 @@ class Auth
                 while($row = $requete->fetch()){
                     if ($row['email'] == $email){
                         echo "L'email est déjà utilisé";
-                        throw new \Iutncy\Sae\Exception\AuthException("L'email est déjà utilisé");
+                        throw new AuthException("L'email est déjà utilisé");
 
                     }
                 }

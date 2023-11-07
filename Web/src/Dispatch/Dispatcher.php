@@ -36,15 +36,22 @@ class Dispatcher
 
     private function renderPage(string $html): void
     {
-        echo "<html>";
-        echo "<head>";
-        echo "<title>Touite</title>";
-        echo "</head>";
-        echo "<body>";
-        echo "<button><a href='index.php'>Touiter</a></button>";
-        echo "<br>";
-        echo $html;
-        echo "</body>";
-        echo "</html>";
+        $base = <<< HTML
+            <html>
+            <head>
+            <meta charset="UTF-8">
+            <title>Touite</title>
+            <link rel="stylesheet" href="./src/style.css">
+            </head>
+            <body>
+            <button onclick="window.location.href='index.php?action=DefaultAction'">Touite</button>
+            <br>
+            $html
+            </body>
+            </head>
+            </html>
+        HTML;
+
+        echo $base;
     }
 }

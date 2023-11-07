@@ -1,0 +1,48 @@
+/*
+	Palette de couleurs :
+    darkgreen : 273C2C
+    dim grey : 626868
+    taupe grey : 939196
+    thistle : D3C1D2
+    pale purple : FFE2FE
+*/
+
+
+body{
+    background-color: #626868;
+}
+
+.default{
+    display: flex;
+}
+
+button{
+    background-color: #939196;
+    border-radius: 15px;
+}
+
+button:hover{
+    background-color: #D3C1D2;
+}
+
+button:active{
+    background-color: #FFE2FE;
+}
+
+.entreeTexte{
+    background-color: #939196;
+    color: #FFE2FE;
+}
+
+.entreeButton{
+    background-color: #939196;
+    border-radius: 15px;
+}
+
+.entreeButton:hover{
+    background-color: #D3C1D2;
+}
+
+.entreeButton:active{
+    background-color: #FFE2FE;
+}

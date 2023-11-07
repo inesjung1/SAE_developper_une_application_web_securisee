@@ -1,6 +1,8 @@
 <?php
 
 namespace Iutncy\Sae\Tag;
+use http\Exception\InvalidArgumentException;
+use Iutncy\Sae\Exception\InvalideName;
 
 class Tag{
     private $libelle;
@@ -14,7 +16,7 @@ class Tag{
     public function __get(string $at): mixed
     {
         if (!property_exists($this, $at)) {
-            throw new \iutnc\deefy\exception\InvalidPropertyNameException(get_called_class() . "invalid property : $at");
+            throw new InvalideName(get_called_class() . "invalid property : $at");
         }
         return $this->$at;
     }

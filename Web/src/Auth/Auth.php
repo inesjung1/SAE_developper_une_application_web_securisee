@@ -26,10 +26,6 @@ class Auth
                         return true;
 
                     }
-                    else{
-                        echo "Le mot de passe est incorrect";
-                        throw new AuthException("Le mot de passe est incorrect");
-                    }
                 }
             }
             return false;

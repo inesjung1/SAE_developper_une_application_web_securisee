@@ -84,7 +84,8 @@ class Auth
             $passwordHash = password_hash($mdp, PASSWORD_DEFAULT);
             $requete = $bdd->prepare('INSERT INTO Utilisateur (AdresseEmail, mdp, pseudo) VALUES (:email, :mdp, :pseudo)');
             $requete->bindValue(':email', $email);
-            $requete->bindValue(':password', $passwordHash);
+            $requete->bindValue(':mdp', $passwordHash);
+            $requete->bindValue(':pseudo', $pseudo);
             $resultat = $requete->execute();
             //vérification de l'ajout de l'utilisateur
             if ($resultat){

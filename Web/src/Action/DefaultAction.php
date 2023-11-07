@@ -12,16 +12,17 @@ class DefaultAction extends Action {
         $touites = $stmt->fetchAll();
         $html = <<<HTML
             <nav>
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <button onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                 <form action="index.php?action=recherche" method="get">
-                    <input class="navi" type="hidden" value="recherche" name="action">
-                    <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche">
-                    <input class="entreeButton navi" type="submit" value="Recherche">
+                    <input type="hidden" value="recherche" name="action">
+                    <input class="entreeTexte" type="text" name="recherche" placeholder="Recherche">
+                    <input class="entreeButton" type="submit" value="Recherche">
                 </form>
-                <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
-                <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
-                <button class="navi" onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
-            </div>
+                <button onclick="window.location.href='index.php?action=connection'">Connexion</button>
+                <button onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+                <button onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
+            </nav>
+            <div class="allTouite">
             HTML;
         foreach ($touites as $touite) {
             $html .= '
@@ -36,6 +37,7 @@ class DefaultAction extends Action {
             </div>
             <br>';
         }
+        $html.="</div>";
         return $html;
     }
 }

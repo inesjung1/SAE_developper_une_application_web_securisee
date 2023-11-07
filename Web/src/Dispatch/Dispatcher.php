@@ -4,6 +4,7 @@ use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 use \Iutncy\Sae\Action\InscriptionAction;
 use \Iutncy\Sae\Action\ShowTouite;
+use \Iutncy\Sae\Action\UtilisateurAction;
 class Dispatcher
 {
     private $action;
@@ -26,6 +27,9 @@ class Dispatcher
                 break;
             case 'affichertouite':
                 $action = new ShowTouite();
+                break;
+            case 'utilisateuraction':
+                $action = new UtilisateurAction();
                 break;
             default:
                 $action = new DefaultAction();

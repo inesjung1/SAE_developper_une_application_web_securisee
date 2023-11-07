@@ -19,6 +19,7 @@ class DefaultAction extends Action {
                 </form>
                 <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
                 <button class="btnInscription" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+                <button class="btnTouite" onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
             </div>
             HTML;
         foreach ($touites as $touite) {

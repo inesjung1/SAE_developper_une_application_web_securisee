@@ -1,9 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace Iutncy\Sae\Action;
-class DefaultAction extends Action {
+use Iutncy\Sae\Touites\ListTouite;
+use Iutncy\Sae\User\User;
+class RechercheAction extends Action {
     public function __construct() {}
     public function execute(): string {
+        $recherche = $_GET['recherche'];
+        $listRecherche = new ListTouite();
+        //$listRecherche->loadFromDb($recherche);
         $html = <<<HTML
             <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
             <button class="btnInscription" onclick="window.location.href='index.php?action=inscription'">Inscription</button>

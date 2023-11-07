@@ -14,6 +14,8 @@ class TouiteRenderer implements Renderer{
         $email = $user->getEmail();
         $content = $touite->getTexte();
         $date = $touite->getDate();
+        $love = $touite->getLove();
+        $dislove = $touite->getDislove();
         switch ($selector) {
             case self::LONG:
                 $html = <<<HTML
@@ -24,14 +26,18 @@ class TouiteRenderer implements Renderer{
                         <div class="touite-date">$date</div>
                     </div>
                     <div class="touite-content">$content</div>
-                </div>
+                    <div class="touite-like">like : $love</div>
+                    <div class="touite-dislike">Dislike : $dislove</div>
+                </div> <br>
                 HTML;
                 break;
             case self::COMPACT:
                 $html = <<<HTML
                 <div class="touite">
                     <div class="touite-content">$content</div>
-                </div>
+                    <div class="touite-like">like : $love</div>
+                    <div class="touite-dislike">Dislike : $dislove</div>
+                </div> <br>
                 HTML;
         }
         return $html;

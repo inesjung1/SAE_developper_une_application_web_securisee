@@ -20,12 +20,13 @@ class DefaultAction extends Action {
                 </form>
                 <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
                 <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
-            </nav>
+                <button class="navi" onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
+            </div>
             HTML;
         foreach ($touites as $touite) {
             $html .= '
             <div class="touiteContainer">
-                <a class="user" href="index.php?action=affichertouite&user=1">' . $touite['PSEUDO'] . '</a>
+                <a class="user" href="index.php?action=UtilisateurAction&user=1">' . $touite['PSEUDO'] . '</a>
                 <p class="touite">' . $touite["Texte"] . '</p>
                 <ul>
                     <li class="date">' . $touite["DatePublication"] . '</li>

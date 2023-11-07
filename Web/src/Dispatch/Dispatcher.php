@@ -4,6 +4,8 @@ use Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 use \Iutncy\Sae\Action\InscriptionAction;
 use \Iutncy\Sae\Action\ShowTouite;
+use \Iutncy\Sae\Action\UtilisateurAction;
+use \Iutncy\Sae\Action\RechercheAction;
 class Dispatcher
 {
     private $action;
@@ -18,6 +20,12 @@ class Dispatcher
     {
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
+            case 'recherche':
+                $action = new RechercheAction();
+                break;
+            case 'UtilisateurAction':
+                $action = new UtilisateurAction();
+                break;
             case 'connection':
                 $action = new ConnectionAction();
                 break;
@@ -26,6 +34,9 @@ class Dispatcher
                 break;
             case 'affichertouite':
                 $action = new ShowTouite();
+                break;
+            case 'utilisateuraction':
+                $action = new UtilisateurAction();
                 break;
             default:
                 $action = new DefaultAction();

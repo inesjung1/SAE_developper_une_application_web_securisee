@@ -3,6 +3,9 @@ declare(strict_types=1);
 namespace Iutncy\Sae\Action;
 use Iutncy\Sae\Touites\ListTouite;
 use Iutncy\Sae\Db\ConnectionFactory;
+use Iutncy\Sae\User\User;
+use Iutncy\Sae\Touites\Touite;
+use Iutncy\Sae\Render\TouiteRenderer;
 class RechercheAction extends Action {
     public function __construct() {}
     public function execute(): string {
@@ -25,19 +28,33 @@ class RechercheAction extends Action {
                 <input type="text" id="recherche" name="recherche" placeholder="Recherche">
                 <input type="submit" value="Recherche">
             </form>
-        HTML;foreach ($touites as $touite) {
-            $html .= '
-            <div class="touiteContainer">
-                <a class="user" href="index.php?action=UtilisateurAction&user='.$touite["UtilisateurID"].'">' . $touite['PSEUDO'] . '</a>
-                <p class="touite">' . $touite["Texte"] . '</p>
-                <ul>
-                    <li class="date">' . $touite["DatePublication"] . '</li>
-                    <li class="love">'. $touite["LOVE"] .'</li>
-                    <li class="love">'. $touite["DISLOVE"] .'</li>
-                </ul>
-            </div>
-            <br>';
-        }
-        return $html;
+        HTML;
+        $liTouite = new ListTouite();
+        foreach ($touites as $touite) {
+            $email = $touite['AdresseEmail'];
+            $pseudo = $touite['PSEUDO'];
+            $mdp = $touite['MDP'];
+            $user = new User($email, $pseudo, $mdp);
+
+            $texte = $touite['Texte'];
+            $date = $touite['DatePublication'];
+
+            //On extrait les tags dans la table ContientTag
+            $db2 = ConnectionFactory::makeConnection();
+            $sql2 = "SELECT * FROM Contienttag WHERE TouiteID = $touite[TouiteID]";
+            $stmt2 = $db2->prepare($sql2);
+            $stmt2->execute();
+            $tag = $stmt2->fetchAll();
+            $litag = [];
+            foreach ($tag as $t) {
+                $litag[] = $t['TagID'];
+            }
+
+            $t = new Touite($texte, $date, $user, $litag);
+            $liTouite -> addTouite($t);
+            $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
+            $html .= $affiche->render(2);
     }
+        return $html;
+}
 }

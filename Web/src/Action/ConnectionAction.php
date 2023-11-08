@@ -22,11 +22,14 @@ public function __construct() {}
             $password = $_POST['password'];
             $Auth = new Auth();
             if ($Auth->authentificate($email, $password)) {
+                setcookie('user', $email, time() + 3600, '/');
                 $html = <<<HTML
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     <p>Vous êtes bien connecté</p>
                 HTML;
             } else {
                 $html = <<<HTML
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     <p>Erreur de connection</p>
                 HTML;
             }

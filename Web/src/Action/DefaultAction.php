@@ -48,12 +48,12 @@ class DefaultAction extends Action {
             $tag = $stmt2->fetchAll();
             $litag = [];
             foreach ($tag as $t) {
-                $litag[] = $t['Tag'];
+                $litag[] = $t['TagID'];
             }
 
             $t = new Touite($texte, $date, $user, $litag);
             $liTouite -> addTouite($t);
-            $affiche = new TouiteRenderer($t);
+            $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
             $html .= $affiche->render(2);
         }
         //$affiche = new ListTouiteRenderer($liTouite);

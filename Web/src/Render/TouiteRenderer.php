@@ -21,11 +21,12 @@ class TouiteRenderer implements Renderer{
                 $html = <<<HTML
                 <div class="touite">
                     <div class="touite-header">
-                        <div class="touite-pseudo"><a class="user" href="index.php?action=ShowProfil">$pseudo</div></a>
+                        <div class="touite-pseudo"><a class="user" href="index.php?action=UtilisateurAction">$pseudo</div></a>
                         <div class="touite-email">$email</div>
                         <div class="touite-date">$date</div>
                     </div>
                     <div class="touite-content">$content</div>
+                    <button id="love" onclick="window.location.href='index.php?action=loveaction'">Love : $love</button>
                     <div class="touite-like">like : $love</div>
                     <div class="touite-dislike">Dislike : $dislove</div>
                 </div> <br>
@@ -35,6 +36,7 @@ class TouiteRenderer implements Renderer{
                 $html = <<<HTML
                 <div class="touite">
                     <div class="touite-content">$content</div>
+                    <button id="love" onclick="window.location.href='index.php?action=loveaction'">Love : $love</button>
                     <div class="touite-like">like : $love</div>
                     <div class="touite-dislike">Dislike : $dislove</div>
                 </div> <br>

@@ -41,4 +41,14 @@ class Touite {
     {
         return $this->dislove;
     }
+
+    public function addLove(): void
+    {
+        $this->love++;
+    }
+
+    public function addDislove(): void
+    {
+        $this->dislove++;
+    }
 }

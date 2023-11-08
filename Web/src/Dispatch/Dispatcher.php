@@ -6,6 +6,7 @@ use \Iutncy\Sae\Action\InscriptionAction;
 use \Iutncy\Sae\Action\ShowTouite;
 use \Iutncy\Sae\Action\UtilisateurAction;
 use \Iutncy\Sae\Action\RechercheAction;
+use \Iutncy\Sae\Action\LoveAction;
 class Dispatcher
 {
     private $action;
@@ -37,6 +38,9 @@ class Dispatcher
                 break;
             case 'utilisateuraction':
                 $action = new UtilisateurAction();
+                break;
+            case 'loveaction':
+                $action = new LoveAction();
                 break;
             default:
                 $action = new DefaultAction();

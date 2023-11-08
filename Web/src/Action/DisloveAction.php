@@ -16,7 +16,7 @@ class DisloveAction extends Action
         $opinion = $stmt0->fetch();
         $count = $opinion['COUNT(*)'];
         if($count == 0) {
-            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 1, 0);";
+            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 0, 0);";
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }

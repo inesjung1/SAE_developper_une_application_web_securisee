@@ -16,7 +16,7 @@ class TouiteRenderer implements Renderer{
         $pseudo = $user->getPseudo();
         $email = $user->getEmail();
         $idU = $user->getId();
-        $content = $touite->getTexte();
+        $content = base64_decode($touite->getTexte());
         $date = $touite->getDate();
         $idT = $touite->getId();
         $db = ConnectionFactory::makeConnection();

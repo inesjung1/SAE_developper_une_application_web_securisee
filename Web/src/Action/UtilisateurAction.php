@@ -45,7 +45,7 @@ class UtilisateurAction extends Action
                 $html .= $_GET['user'];
                 $html .= <<<HTML
                     " method="post">
-                        <textarea name="texteTouite" placeholder="Quoi de neuf?"></textarea>
+                        <textarea name="texteTouite" placeholder="Quoi de neuf?" maxlength="235"></textarea>
                         <input type="submit" value="Publier Touite">
                     </form>
                 </div>
@@ -69,7 +69,7 @@ class UtilisateurAction extends Action
             $db = ConnectionFactory::makeConnection();
             $sql = "INSERT INTO Touite (Texte, datePublication, UtilisateurID) VALUES (:texte, :datePublication, :UtilisateurID)";
             $stmt = $db->prepare($sql);
-            $stmt->bindValue(':texte', $texteTouite);
+            $stmt->bindValue(':texte', base64_encode($texteTouite));
             $stmt->bindValue(':datePublication', date("Y-m-d H:i:s"));
             $stmt->bindValue(':UtilisateurID', $_GET['user']);
             $stmt->execute();

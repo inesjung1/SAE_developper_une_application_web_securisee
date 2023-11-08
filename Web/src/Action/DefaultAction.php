@@ -15,7 +15,7 @@ class DefaultAction extends Action {
         $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY datePublication DESC";
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $touites = $stmt->fetchAll();
+        $touites =  $stmt->fetchAll();
         $html = <<<HTML
             <nav>
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>

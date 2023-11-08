@@ -34,27 +34,68 @@ class TouiteRenderer implements Renderer{
                 <div class="touite">
                     <div class="touite-header">
                         <div class="touite-pseudo">
+                        <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
                 HTML;
-                $html.= '<a class="user" href="index.php?action=UtilisateurAction&user='.$idU.'">' . $pseudo . '</a>';
+                if(($_COOKIE['user'] != 0)&&($_COOKIE['user'] != $monId)){
+                    echo('aheriufgeriugfrfgiu');
+                    $sql3 = "SELECT COUNT(*) FROM Abonnement WHERE AbonneUtilisateurID = $monId AND SuiviUtilisateurID = $idU;";
+                    $stmt3 = $db->prepare($sql3);
+                    $stmt3->execute();
+                    $abonnements = $stmt3->fetchAll();
+                    $count = $abonnements['COUNT(*)'];
+                    //on verifie que l'utilisateur n'est pas deja abonné
+                    if($count == 0) {
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=Sabonner&idU=$idU&id=$idT&aaction=$action'">S'abonner</button>
+                        HTML;
+                    }else{
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonner&idU=$idU&id=$idT&aaction=$action'">Se désabonner</button>
+                        HTML;
+                    }
+                }
                 $html .= <<<HTML
                         </div>
                         <div class="touite-email">$email</div>
                         <div class="touite-date">$date</div>
                     </div>
                     <div class="touite-content">$content</div>
-                    <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
-                    <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                    HTML;
+                    if ($_COOKIE['user']!=0){
+                        $html .= <<<HTML
+                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
+                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                        HTML;
+                    }else{
+                        $html .= <<<HTML
+                        <button id="love">Love : $love</button>
+                        <button id="dislove">Dislove : $dislove</button>
+                        HTML;
+                    }
+                    $html .= <<<HTML
                     </div> <br>
-                HTML;
+                    HTML;
                 break;
             case self::COMPACT:
                 $html = <<<HTML
-                <div class="touite">
+                    <div class="touite">
                     <div class="touite-content">$content</div>
-                    <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
-                    <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
-                </div> <br>
-                HTML;
+                    HTML;
+                if ($_COOKIE['user']!=0){
+                    $html .= <<<HTML
+                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
+                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                        HTML;
+                }else{
+                    $html .= <<<HTML
+                        <button id="love">Love : $love</button>
+                        <button id="dislove">Dislove : $dislove</button>
+                        HTML;
+                }
+                $html .= <<<HTML
+                    </div> <br>
+                    HTML;
+
         }
         return $html;
     }

@@ -9,6 +9,7 @@ use \Iutncy\Sae\Action\RechercheAction;
 use \Iutncy\Sae\Action\LoveAction;
 use \Iutncy\Sae\Action\DisloveAction;
 use \Iutncy\Sae\Action\DeconnexionAction;
+use \Iutncy\Sae\Action\AbonnementsAction;
 class Dispatcher
 {
     private $action;
@@ -50,6 +51,9 @@ class Dispatcher
             case 'deconnexionaction':
                 $action = new DeconnexionAction();
                 break;
+                case 'AbonnementsAction':
+                    $action = new AbonnementsAction();
+                    break;
             default:
                 $action = new DefaultAction();
                 break;

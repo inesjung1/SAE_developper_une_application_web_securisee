@@ -26,7 +26,7 @@ class DefaultAction extends Action {
                 </form>
                 <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
                 <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
-                <button class="navi" onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
+                <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
             </div>
             HTML;
         $liTouite = new ListTouite();

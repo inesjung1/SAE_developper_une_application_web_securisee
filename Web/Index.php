@@ -8,5 +8,10 @@ use Iutncy\Sae\Db\ConnectionFactory;
 
 ConnectionFactory::setConfig("./config.ini");
 $db = ConnectionFactory::makeConnection();
+//création du cookie user
+if (!isset($_COOKIE['user'])) {
+    setcookie('user', "0", time() + 3600, '/');
+}
 $dispatcher = new Dispatcher();
 $dispatcher->run();
+

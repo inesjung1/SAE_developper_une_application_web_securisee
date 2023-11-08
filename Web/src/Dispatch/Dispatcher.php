@@ -8,6 +8,7 @@ use \Iutncy\Sae\Action\UtilisateurAction;
 use \Iutncy\Sae\Action\RechercheAction;
 use \Iutncy\Sae\Action\LoveAction;
 use \Iutncy\Sae\Action\DisloveAction;
+use \Iutncy\Sae\Action\DeconnexionAction;
 class Dispatcher
 {
     private $action;
@@ -15,7 +16,7 @@ class Dispatcher
     public function __construct()
     {
         // Récupère la valeur du paramètre "action" du query-string
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'add-user';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'defaultaction';
     }
 
     public function run():void
@@ -46,6 +47,9 @@ class Dispatcher
                 case 'disloveaction':
                     $action = new DisloveAction();
                     break;
+            case 'deconnexionaction':
+                $action = new DeconnexionAction();
+                break;
             default:
                 $action = new DefaultAction();
                 break;

@@ -11,6 +11,20 @@ class UtilisateurAction extends Action
     public function execute(): string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $navbar = <<<NAVBAR
+            <nav>
+                <button onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <form action="index.php?action=recherche" method="get">
+                    <input type="hidden" value="recherche" name="action">
+                    <input class="entreeTexte" type="text" name="recherche" placeholder="Recherche">
+                    <input class="entreeButton" type="submit" value="Recherche">
+                </form>
+                <button onclick="window.location.href='index.php?action=connection'">Connexion</button>
+                <button onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+                <button onclick="window.location.href='index.php?action=utilisateuraction'">Touitez</button>
+            </nav>
+            NAVBAR;
+            echo $navbar;
             echo $this->afficherTouites();
             echo $this->afficherFormulaireTouite();
         } else {

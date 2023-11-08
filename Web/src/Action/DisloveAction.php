@@ -16,13 +16,13 @@ class DisloveAction extends Action
         $opinion = $stmt0->fetch();
         $count = $opinion['COUNT(*)'];
         if($count == 0) {
-            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 0, 0);";
+            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 0, 1);";
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }
         $this->ajouterDisloveTouite();
-        $action = $_GET['action'];
-        header('Location: '.$_SERVER['PHP_SELF'].'?action='.$action);
+        $action = base64_decode($_GET['aaction']);
+        header('Location: '.$_SERVER['PHP_SELF'].'?'.$action);
         return '';
     }
 

@@ -36,13 +36,12 @@ class TouiteRenderer implements Renderer{
                         <div class="touite-pseudo">
                         <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
                 HTML;
-                if(($_COOKIE['user'] != 0)&&($_COOKIE['user'] != $monId)){
-                    echo('aheriufgeriugfrfgiu');
-                    $sql3 = "SELECT COUNT(*) FROM Abonnement WHERE AbonneUtilisateurID = $monId AND SuiviUtilisateurID = $idU;";
+                if(($_COOKIE['user'] != 0)&&($idU != $monId)){
+                    $sql3 = "SELECT COUNT(*) FROM abonnement WHERE AbonneUtilisateurID = $monId AND SuiviUtilisateurID = $idU;";
                     $stmt3 = $db->prepare($sql3);
                     $stmt3->execute();
                     $abonnements = $stmt3->fetchAll();
-                    $count = $abonnements['COUNT(*)'];
+                    $count = $abonnements[0]['COUNT(*)'];
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML

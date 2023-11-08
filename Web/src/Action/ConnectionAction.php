@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Iutncy\Sae\Action;
 use Iutncy\Sae\Auth\Auth;
+use Iutncy\Sae\Db\ConnectionFactory;
 class ConnectionAction extends Action {
 public function __construct() {}
     public function execute(): string
@@ -20,9 +21,17 @@ public function __construct() {}
         } else {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            //recuperation de l'id
+            $db = ConnectionFactory::makeConnection();
+            $sql = "SELECT UtilisateurID FROM Utilisateur WHERE AdresseEmail = '$email'";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $idU = $stmt->fetch()['UtilisateurID'];
+            //transformer $idU en string
+            $idU = (string) $idU;
             $Auth = new Auth();
             if ($Auth->authentificate($email, $password)) {
-                setcookie('user', $email, time() + 3600, '/');
+                setcookie('user', $idU, time() + 3600, '/');
                 $html = <<<HTML
                     <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     <p>Vous êtes bien connecté</p>

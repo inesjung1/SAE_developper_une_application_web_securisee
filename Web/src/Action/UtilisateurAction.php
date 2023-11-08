@@ -36,7 +36,7 @@ class UtilisateurAction extends Action
             $stmt = $db->prepare($sql);
             $stmt2->execute();
             $stmt->execute();
-            if ($_COOKIE['user'] == $stmt2->fetch()['AdresseEmail']) {
+            if ($_COOKIE['user'] == $stmt2->fetch()['UtilisateurID']) {
                 $html = <<<HTML
                 <button id="btnEcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
                 <div id="zoneDeTexteTouite" style="display:none;">
@@ -113,7 +113,8 @@ class UtilisateurAction extends Action
             $t = new Touite($texte, $date, $user, $litag);
             $liTouite -> addTouite($t);
             $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
-            $html .= $affiche->render(2);
+            $act = $_SERVER['QUERY_STRING'];
+            $html .= $affiche->render(2, $act);
         }
         return $html;
     }

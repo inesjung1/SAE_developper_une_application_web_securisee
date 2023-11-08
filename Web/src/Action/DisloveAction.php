@@ -2,14 +2,10 @@
 
 namespace Iutncy\Sae\Action;
 
-use Iutncy\Sae\db\ConnectionFactory;
+use Iutncy\Sae\Db\ConnectionFactory;
 
-class LoveAction
+class DisloveAction extends Action
 {
-    public function __construct()
-    {
-    }
-
     public function execute(): string{
         $db = ConnectionFactory::makeConnection();
         $idUtil = $_GET['idU'];
@@ -24,13 +20,13 @@ class LoveAction
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }
-        $this->ajouterLikeTouite();
-        $action = base64_decode($_GET['aaction']);
-        header('Location: '.$_SERVER['PHP_SELF'].'?'.$action);
+        $this->ajouterDisloveTouite();
+        $action = $_GET['action'];
+        header('Location: '.$_SERVER['PHP_SELF'].'?action='.$action);
         return '';
     }
 
-    public function ajouterLikeTouite(){
+    public function ajouterDisloveTouite(){
         $idUtil = $_GET['idU'];
         $db = ConnectionFactory::makeConnection();
         $sql0 = "SELECT * FROM Opinion WHERE UtilisateurID = $idUtil;";
@@ -44,38 +40,36 @@ class LoveAction
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $touite = $stmt->fetch();
-        $love = $touite['LOVE'];
-
+        $dislove = $touite['DISLOVE'];
         if(($isLove == 0)&&($isDislove == 0)){
-            $love++;
-            $sql2 = "UPDATE Touite SET LOVE = $love WHERE TouiteID = $id;";
+            $dislove++;
+            $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
             $stmt2->execute();
-            $sql3 = "UPDATE Opinion SET IsLove = 1 WHERE UtilisateurID = $idUtil;";
+            $sql3 = "UPDATE Opinion SET IsDislove = 1 WHERE UtilisateurID = $idUtil;";
             $stmt3 = $db->prepare($sql3);
             $stmt3->execute();
-        }else if(($isLove == 0)&&($isDislove == 1)) {
-            $love++;
-            $sql2 = "UPDATE Touite SET LOVE = $love WHERE TouiteID = $id;";
+        }else if(($isLove == 1)&&($isDislove == 0)) {
+            $dislove++;
+            $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
             $stmt2->execute();
-            $dislove = $touite['DISLOVE'];
-            $dislove--;
-            $sql4 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
+            $love = $touite['LOVE'];
+            $love--;
+            $sql4 = "UPDATE Touite SET LOVE = $love WHERE TouiteID = $id;";
             $stmt4 = $db->prepare($sql4);
             $stmt4->execute();
-            $sql5 = "UPDATE Opinion SET IsLove = 1, IsDislove = 0 WHERE UtilisateurID = $idUtil;";
+            $sql5 = "UPDATE Opinion SET IsDislove = 1, IsLove = 0 WHERE UtilisateurID = $idUtil;";
             $stmt5 = $db->prepare($sql5);
             $stmt5->execute();
-        }else if(($isLove == 1)&&($isDislove == 0)) {
-            $love--;
-            $sql2 = "UPDATE Touite SET LOVE = $love WHERE TouiteID = $id;";
+        }else if(($isLove == 0)&&($isDislove == 1)) {
+            $dislove--;
+            $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
             $stmt2->execute();
-            $sql6 = "UPDATE Opinion SET IsLove = 0 WHERE UtilisateurID = $idUtil;";
+            $sql6 = "UPDATE Opinion SET IsDislove = 0 WHERE UtilisateurID = $idUtil;";
             $stmt6 = $db->prepare($sql6);
             $stmt6->execute();
         }
     }
-
 }

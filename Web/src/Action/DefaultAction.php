@@ -54,7 +54,8 @@ class DefaultAction extends Action {
             $t = new Touite($texte, $date, $user, $litag);
             $liTouite -> addTouite($t);
             $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
-            $html .= $affiche->render(2);
+            $act = $_SERVER['QUERY_STRING'];
+            $html .= $affiche->render(2, $act);
         }
         //$affiche = new ListTouiteRenderer($liTouite);
         //$html .= $affiche->render();

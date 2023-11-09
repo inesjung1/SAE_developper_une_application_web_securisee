@@ -13,7 +13,7 @@ class Touite {
 
     public function __construct(string $texte, string $date, User $auteur, array $liTag) {
         $db = ConnectionFactory::makeConnection();
-        $sql = "SELECT TouiteID FROM Touite WHERE Texte = '$texte'" AND "DatePublication = '$date'";
+        $sql = "SELECT TouiteID FROM Touite WHERE Texte = '$texte' AND DatePublication = '$date' AND UtilisateurID = '".$auteur->getId()."';";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $this->id = $stmt->fetch()['TouiteID'];

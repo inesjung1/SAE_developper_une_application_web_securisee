@@ -12,6 +12,7 @@ class TouiteRenderer implements Renderer{
     public function render(int $selector, string $aaction): string {
         $action = base64_encode($aaction);
         $touite = $this->touite;
+        $idTouite = $touite->getId();
         $user = $touite->getAuteur();
         $pseudo = $user->getPseudo();
         $email = $user->getEmail();
@@ -67,6 +68,10 @@ class TouiteRenderer implements Renderer{
                         <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonner&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
                         HTML;
                     }
+                }else if($_COOKIE['user'] != 0){
+                    $html .= <<<HTML
+                    <button id="delete" onclick="window.location.href='index.php?action=DeleteTouite&idTouite=$idTouite&aaction=$action'">Supprimer</button>
+                    HTML;
                 }
                 $html .= <<<HTML
                         </div>

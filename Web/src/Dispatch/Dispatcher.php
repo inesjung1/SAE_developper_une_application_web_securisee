@@ -45,9 +45,6 @@ class Dispatcher
             case 'affichertouite':
                 $action = new ShowTouite();
                 break;
-            case 'utilisateuraction':
-                $action = new UtilisateurAction();
-                break;
             case 'loveaction':
                 $action = new LoveAction();
                 break;

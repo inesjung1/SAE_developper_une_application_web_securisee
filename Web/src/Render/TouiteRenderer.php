@@ -102,7 +102,7 @@ class TouiteRenderer implements Renderer{
                     $abonnements = $stmt6->fetchAll();
                     $count = $abonnements[0]['COUNT(*)'];
                     $html .= <<<HTML
-                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">$tag</div>
+                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">$tag</a></div>
                     HTML;
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
@@ -115,7 +115,6 @@ class TouiteRenderer implements Renderer{
                         HTML;
                     }
                 }
-
                     if ($_COOKIE['user']!=0){
                         $html .= <<<HTML
                         <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>

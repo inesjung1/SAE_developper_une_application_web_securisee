@@ -27,6 +27,21 @@ class TouiteRenderer implements Renderer{
         $stmt2->execute();
         $love = $stmt->fetch()['LOVE'];
         $dislove = $stmt2->fetch()['DISLOVE'];
+        $tag = '';
+        $sql5 = "SELECT COUNT(*) FROM contienttag WHERE TouiteID = $idT;";
+        $stmt5 = $db->prepare($sql5);
+        $stmt5->execute();
+        $count = $stmt5->fetch()['COUNT(*)'];
+        if($count != 0){
+            $sql4 = "SELECT LIBELLE, tag.TagID FROM tag
+            INNER JOIN contienttag ON contienttag.TagID = tag.TagID
+            WHERE contienttag.TouiteID = $idT;";
+            $stmt4 = $db->prepare($sql4);
+            $stmt4->execute();
+            $v = $stmt4->fetchAll()[0];
+            $tag = $v['LIBELLE'];
+            $tagID = $v['TagID'];
+        }
         $monId = $_COOKIE['user'];
         switch ($selector) {
             case self::LONG:
@@ -45,11 +60,11 @@ class TouiteRenderer implements Renderer{
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML
-                        <button id="abonnement" onclick="window.location.href='index.php?action=Sabonner&idU=$idU&id=$idT&aaction=$action'">S'abonner</button>
+                        <button id="abonnement" onclick="window.location.href='index.php?action=Sabonner&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonner&idU=$idU&id=$idT&aaction=$action'">Se désabonner</button>
+                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonner&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
                         HTML;
                     }
                 }
@@ -59,7 +74,30 @@ class TouiteRenderer implements Renderer{
                         <div class="touite-date">$date</div>
                     </div>
                     <div class="touite-content">$content</div>
+                HTML;
+                // On affiche le tag si il existe
+
+                if ($tag != ''){
+                    $sql6 = "SELECT COUNT(*) FROM abonnementtag WHERE AbonneUtilisateurID = $monId AND abonnementtag.TagID = $tagID;";
+                    $stmt6 = $db->prepare($sql6);
+                    $stmt6->execute();
+                    $abonnements = $stmt6->fetchAll();
+                    $count = $abonnements[0]['COUNT(*)'];
+                    $html .= <<<HTML
+                    <div class="touite-tag">$tag</div>
                     HTML;
+                    //on verifie que l'utilisateur n'est pas deja abonné
+                    if($count == 0) {
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        HTML;
+                    }else{
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        HTML;
+                    }
+                }
+
                     if ($_COOKIE['user']!=0){
                         $html .= <<<HTML
                         <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
@@ -78,6 +116,7 @@ class TouiteRenderer implements Renderer{
             case self::COMPACT:
                 $html = <<<HTML
                     <div class="touite">
+                    <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
                     <div class="touite-content">$content</div>
                     HTML;
                 if ($_COOKIE['user']!=0){

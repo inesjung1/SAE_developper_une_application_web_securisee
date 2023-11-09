@@ -32,6 +32,7 @@ class AbonnementsAction extends Action
             <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
             <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
             <button class="navi" onclick="window.location.href='index.php?action=AbonnementsAction'">Mes Abonnements</button>
+            <button class="navi" onclick="window.location.href='index.php?action=AbonnementsTag'">Mes Tags</button>
             HTML;
         }else{
             $html .= <<<HTML

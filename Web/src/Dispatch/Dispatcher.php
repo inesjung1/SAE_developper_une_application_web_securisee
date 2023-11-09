@@ -10,6 +10,11 @@ use \Iutncy\Sae\Action\LoveAction;
 use \Iutncy\Sae\Action\DisloveAction;
 use \Iutncy\Sae\Action\DeconnexionAction;
 use \Iutncy\Sae\Action\AbonnementsAction;
+use \Iutncy\Sae\Action\Sabonner;
+use \Iutncy\Sae\Action\SeDesabonner;
+use \Iutncy\Sae\Action\AbonnementsTag;
+use \Iutncy\Sae\Action\SabonnerTag;
+use \Iutncy\Sae\Action\SeDesabonnerTag;
 class Dispatcher
 {
     private $action;
@@ -51,9 +56,24 @@ class Dispatcher
             case 'deconnexionaction':
                 $action = new DeconnexionAction();
                 break;
-                case 'AbonnementsAction':
-                    $action = new AbonnementsAction();
-                    break;
+            case 'AbonnementsAction':
+                $action = new AbonnementsAction();
+                break;
+            case 'Sabonner':
+                $action = new Sabonner();
+                break;
+            case 'SeDesabonner':
+                $action = new SeDesabonner();
+                break;
+            case 'AbonnementsTag':
+                $action = new AbonnementsTag();
+                break;
+            case 'SabonnerTag':
+                $action = new SabonnerTag();
+                break;
+            case 'SeDesabonnerTag':
+                $action = new SeDesabonnerTag();
+                break;
             default:
                 $action = new DefaultAction();
                 break;

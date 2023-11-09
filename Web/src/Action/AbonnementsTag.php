@@ -1,18 +1,21 @@
 <?php
-declare(strict_types=1);
+
 namespace Iutncy\Sae\Action;
+
 use Iutncy\Sae\Db\ConnectionFactory;
+use Iutncy\Sae\Render\TouiteRenderer;
 use Iutncy\Sae\Touites\ListTouite;
 use Iutncy\Sae\Touites\Touite;
 use Iutncy\Sae\User\User;
-use Iutncy\Sae\Render\TouiteRenderer;
-use Iutncy\Sae\Render\ListTouiteRenderer;
-use Iutncy\Sae\Render\Renderer;
-class DefaultAction extends Action {
-    public function __construct() {}
+
+class AbonnementsTag extends Action
+{
     public function execute(): string {
         $db = ConnectionFactory::makeConnection();
-        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY datePublication DESC";
+        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID
+        INNER JOIN contienttag ON Touite.TouiteID = contienttag.TouiteID
+        INNER JOIN Abonnementtag ON Abonnementtag.TagID = contienttag.TagID 
+        WHERE abonnementtag.AbonneUtilisateurID = ".$_COOKIE['user']." ORDER BY datePublication DESC";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $touites =  $stmt->fetchAll();
@@ -74,4 +77,5 @@ class DefaultAction extends Action {
         //$html .= $affiche->render();
         return $html;
     }
+
 }

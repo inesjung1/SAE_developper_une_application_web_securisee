@@ -1,6 +1,11 @@
 <?php
 namespace Iutncy\Sae\Action;
 use Iutncy\Sae\Db\ConnectionFactory;
+use Iutncy\Sae\Touites\ListTouite;
+use Iutncy\Sae\Touites\Touite;
+use Iutncy\Sae\User\User;
+use Iutncy\Sae\Render\TouiteRenderer;
+
 class UtilisateurAction extends Action
 {
     public function __construct()
@@ -102,7 +107,7 @@ class UtilisateurAction extends Action
         if (!empty($texteTouite)) {
             $sqlTouite = "INSERT INTO Touite (Texte, ImageID, DatePublication, UtilisateurID) VALUES (:texte, :imageID, NOW(), :UtilisateurID)";
             $stmtTouite = $db->prepare($sqlTouite);
-            $stmtTouite->bindValue(':texte', $texteTouite);
+            $stmtTouite->bindValue(':texte', base64_encode($texteTouite));
             $stmtTouite->bindValue(':imageID', $imageID, \PDO::PARAM_INT);
             $stmtTouite->bindValue(':UtilisateurID', $_GET['user']);
 
@@ -120,23 +125,38 @@ class UtilisateurAction extends Action
 
     private function afficherTouites(): string {
         $db = ConnectionFactory::makeConnection();
-        $sql = "SELECT Touite.*, Image.CheminFichier FROM Touite
-            LEFT JOIN Image ON Touite.ImageID = Image.ImageID
-            WHERE Touite.UtilisateurID = :userID ORDER BY datePublication DESC";
+        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID
+                    WHERE Touite.UtilisateurID='".$_GET['user']."' ORDER BY datePublication DESC";
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':userID', $_GET['user']);
         $stmt->execute();
         $touites = $stmt->fetchAll();
         $html = '';
-
+        $liTouite = new ListTouite();
         foreach ($touites as $touite) {
-            $html .= '<div class="touite">';
-            $html .= '<p>' . htmlspecialchars($touite['Texte']) . '</p>';
-            $html .= '<p>Publié le : ' . htmlspecialchars($touite['DatePublication']) . '</p>';
-            if (!empty($touite['CheminFichier'])) {
-                $html .= '<img src="' . htmlspecialchars($touite['CheminFichier']) . '" alt="Image du touite" width="150" height="150"/>';
+            $email = $touite['AdresseEmail'];
+            $pseudo = $touite['PSEUDO'];
+            $mdp = $touite['MDP'];
+            $user = new User($email, $pseudo, $mdp);
+
+            $texte = $touite['Texte'];
+            $date = $touite['DatePublication'];
+
+            //On extrait les tags dans la table ContientTag
+            $db2 = ConnectionFactory::makeConnection();
+            $sql2 = "SELECT * FROM Contienttag WHERE TouiteID = $touite[TouiteID]";
+            $stmt2 = $db2->prepare($sql2);
+            $stmt2->execute();
+            $tag = $stmt2->fetchAll();
+            $litag = [];
+            foreach ($tag as $t) {
+                $litag[] = $t['TagID'];
             }
-            $html .= '</div>';
+
+            $t = new Touite($texte, $date, $user, $litag);
+            $liTouite -> addTouite($t);
+            $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
+            $act = $_SERVER['QUERY_STRING'];
+            $html .= $affiche->render(2, $act);
         }
         return $html;
     }

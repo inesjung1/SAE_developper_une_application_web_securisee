@@ -43,6 +43,15 @@ class TouiteRenderer implements Renderer{
             $tagID = $v['TagID'];
         }
         $monId = $_COOKIE['user'];
+        //On récupère l'image si elle existe
+        $sql10 = "SELECT CheminFichier FROM Touite
+        LEFT JOIN Image ON Touite.ImageID = Image.ImageID
+         WHERE TouiteID = $idT;";
+        $stmt10 = $db->prepare($sql10);
+        $stmt10->execute();
+        $image = $stmt10->fetchAll();
+        $image = $image[0]['CheminFichier'];
+
         switch ($selector) {
             case self::LONG:
                 $html = <<<HTML
@@ -75,6 +84,10 @@ class TouiteRenderer implements Renderer{
                     </div>
                     <div class="touite-content">$content</div>
                 HTML;
+                //On affiche l'image si elle existe
+                if (!empty($image)) {
+                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
+                }
                 // On affiche le tag si il existe
 
                 if ($tag != ''){
@@ -119,6 +132,9 @@ class TouiteRenderer implements Renderer{
                     <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
                     <div class="touite-content">$content</div>
                     HTML;
+                if (!empty($image)) {
+                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
+                }
                 if ($_COOKIE['user']!=0){
                     $html .= <<<HTML
                         <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>

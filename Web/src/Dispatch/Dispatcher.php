@@ -96,7 +96,8 @@ class Dispatcher
             <link rel="stylesheet" href="./src/style.css">
             </head>
             <body>
-            $html
+             <section>$html
+            </section>
             </body>
             </head>
             </html>

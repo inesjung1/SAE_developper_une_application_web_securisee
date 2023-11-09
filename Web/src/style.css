@@ -1,48 +1,77 @@
-/*
-    fond clair : F6F7EB
-    light coral : E69597
-    light red : FF7477
-    eggplant : 553E4E
-    night : 0A090C
-*/
-
-body{
-    background-color: #F6F7EB;
+/* Réinitialisation de base pour les styles de navigateur */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-button{
-    background-color: #E69597;
-    border-radius: 15px;
+/* Variables de couleur */
+:root {
+    --fond-clair: #F6F7EB;
+    --light-coral: #E69597;
+    --light-red: #FF7477;
+    --eggplant: #553E4E;
+    --night: #0A090C;
 }
 
-button:hover{
-    background-color: #FF7477;
+body {
+    background-color: var(--fond-clair);
+    font-family: 'Arial', sans-serif;
 }
 
-.entreeTexte{
-    background-color: #E69597;
-    color: black;
+/* Barre latérale */
+nav {
+    background-color: var(--light-coral);
+    height: 100vh; /* Pleine hauteur */
+    width: 250px; /* Largeur fixe pour la barre latérale */
+    position: fixed; /* La barre latérale est fixe lors du défilement */
+    top: 0; /* Coller en haut */
+    left: 0; /* Coller à gauche */
+    overflow-y: auto; /* Défilement si le contenu est trop long */
+    padding: 1rem; /* Espace à l'intérieur de la barre latérale */
 }
 
-.entreeButton{
-    background-color: #E69597;
-    border-radius: 15px;
+/* Header */
+header {
+    background-color: var(--eggplant);
+    color: var(--fond-clair);
+    padding: 1rem;
+    text-align: center;
+    position: fixed; /* Fixe en haut de la page */
+    width: 100%; /* Pleine largeur */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* S'assure que le header est au-dessus des autres éléments */
+    padding-left: 250px; /* Décaler le contenu du header de la largeur de la barre latérale */
 }
 
-.entreeButton:hover{
-    background-color: #FF7477;
+/* Section des tweets */
+section {
+    margin-top: 60px; /* Espace pour le header */
+    margin-left: 250px; /* Décaler pour la barre latérale */
+    padding: 20px;
 }
 
-nav{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    width: 20%;
-    border-right: solid 1px black;
-    align-items: center;
+/* Styles des tweets */
+.tweet {
+    background-color: white;
+    border: 1px solid var(--eggplant);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.navi{
-    margin: 2%;
-    width: 50%;
+/* Responsive design pour les écrans plus petits */
+@media (max-width: 768px) {
+    nav {
+        width: 100px; /* Réduction de la barre latérale pour les écrans plus petits */
+    }
+
+    header {
+        padding-left: 100px; /* Réduction du padding du header */
+    }
+
+    section {
+        margin-left: 100px; /* Réduction de la marge de la section */
+    }
 }

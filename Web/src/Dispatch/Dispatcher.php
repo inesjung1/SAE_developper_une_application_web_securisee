@@ -17,6 +17,7 @@ use \Iutncy\Sae\Action\SabonnerTag;
 use \Iutncy\Sae\Action\SeDesabonnerTag;
 use \Iutncy\Sae\Action\MesAbonnesAction;
 use \Iutncy\Sae\Action\DeleteTouite;
+use \Iutncy\Sae\Action\AfficherTouiteAction;
 class Dispatcher
 {
     private $action;
@@ -31,6 +32,9 @@ class Dispatcher
     {
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
+            case 'AfficherTouiteAction':
+                $action = new AfficherTouiteAction();
+                break;
             case 'recherche':
                 $action = new RechercheAction();
                 break;

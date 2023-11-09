@@ -55,7 +55,7 @@ class TouiteRenderer implements Renderer{
         switch ($selector) {
             case self::LONG:
                 $html = <<<HTML
-                <div class="touite">
+                <div class="touite"  >
                     <div class="touite-header">
                         <div class="touite-pseudo">
                         <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
@@ -119,6 +119,7 @@ class TouiteRenderer implements Renderer{
                         $html .= <<<HTML
                         <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
                         <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                        <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">+</button>
                         HTML;
                     }else{
                         $html .= <<<HTML

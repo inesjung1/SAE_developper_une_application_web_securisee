@@ -16,6 +16,7 @@ use \Iutncy\Sae\Action\AbonnementsTag;
 use \Iutncy\Sae\Action\SabonnerTag;
 use \Iutncy\Sae\Action\SeDesabonnerTag;
 use \Iutncy\Sae\Action\MesAbonnesAction;
+use \Iutncy\Sae\Action\DeleteTouite;
 class Dispatcher
 {
     private $action;
@@ -74,6 +75,9 @@ class Dispatcher
                 break;
             case 'MesAbonnesAction':
                 $action = new MesAbonnesAction();
+                break;
+            case 'DeleteTouite':
+                $action = new DeleteTouite();
                 break;
             default:
                 $action = new DefaultAction();

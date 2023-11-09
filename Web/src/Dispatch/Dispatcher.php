@@ -15,6 +15,7 @@ use \Iutncy\Sae\Action\SeDesabonner;
 use \Iutncy\Sae\Action\AbonnementsTag;
 use \Iutncy\Sae\Action\SabonnerTag;
 use \Iutncy\Sae\Action\SeDesabonnerTag;
+use \Iutncy\Sae\Action\MesAbonnesAction;
 class Dispatcher
 {
     private $action;
@@ -73,6 +74,9 @@ class Dispatcher
                 break;
             case 'SeDesabonnerTag':
                 $action = new SeDesabonnerTag();
+                break;
+            case 'MesAbonnesAction':
+                $action = new MesAbonnesAction();
                 break;
             default:
                 $action = new DefaultAction();

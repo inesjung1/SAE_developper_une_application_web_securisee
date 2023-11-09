@@ -68,10 +68,8 @@ class DefaultAction extends Action {
             $liTouite -> addTouite($t);
             $affiche = new TouiteRenderer($t,$touite['UtilisateurID']);
             $act = $_SERVER['QUERY_STRING'];
-            $html .= $affiche->render(1, $act);
+            $html .= $affiche->render(2, $act);
         }
-        //$affiche = new ListTouiteRenderer($liTouite);
-        //$html .= $affiche->render();
         return $html;
     }
 }

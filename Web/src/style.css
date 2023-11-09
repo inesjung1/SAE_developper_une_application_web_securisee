@@ -8,6 +8,8 @@
 
 body{
     background-color: #F6F7EB;
+    display: flex;
+    flex-direction: row;
 }
 
 button{
@@ -42,7 +44,36 @@ nav{
     align-items: center;
 }
 
-.navi{
+nav form{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+}
+
+nav button{
     margin: 2%;
     width: 50%;
+}
+
+.allTouite{
+    margin: 2%;
+}
+
+.touiteContainer{
+    border: solid 2px #0A090C;
+    padding: 2%;
+    margin: 2%;
+    width: 500px;
+}
+
+.touiteContainer ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.touiteContainer ul li{
+    margin-left: 5%;
+    margin-right: 5%;
 }

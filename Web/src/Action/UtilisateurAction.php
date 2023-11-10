@@ -1,6 +1,7 @@
 <?php
 namespace Iutncy\Sae\Action;
 use Iutncy\Sae\Db\ConnectionFactory;
+use Iutncy\Sae\Render\UtilRenderer;
 use Iutncy\Sae\Touites\ListTouite;
 use Iutncy\Sae\Touites\Touite;
 use Iutncy\Sae\User\User;
@@ -21,6 +22,7 @@ class UtilisateurAction extends Action
         }
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $idU = $_COOKIE['user'];
+            $id2 = $_GET['user'];
             $html = <<<HTML
                 <nav>
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
@@ -48,13 +50,21 @@ class UtilisateurAction extends Action
             $html .= <<<HTML
             </nav>
         HTML;
-            echo $html;
-            echo $this->afficherFormulaireTouite();
-            echo $this->afficherTouites();
+            $affiche = New UtilRenderer($id2);
+            $af = $affiche->render(1, "UtilisateurAction");
+            $html .= <<<HTML
+                <div class="touite-header">
+                    <div class="touite-pseudo">
+                    $af
+                    </div>
+                </div>
+            HTML;
+            $html .= $this->afficherFormulaireTouite();
+            $html .= $this->afficherTouites();
         } else {
             $this->traiterTouite();
         }
-        return '';
+        return $html;
     }
 
     private function afficherFormulaireTouite(): string {

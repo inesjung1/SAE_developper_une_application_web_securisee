@@ -96,8 +96,8 @@ nav input[type="text"] {
 .touite-content {
     max-width: 450px;
     overflow-wrap: break-word;
-    font-size: 15px; /* Nouvelle taille de police */
-    line-height: 1.9; /* Espacement entre les lignes amélioré */
+    font-size: 15px;
+    line-height: 1.9;
 }
 
 .touite:hover {

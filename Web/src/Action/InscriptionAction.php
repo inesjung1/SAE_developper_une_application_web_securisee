@@ -12,7 +12,7 @@ class InscriptionAction extends Action {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
             <nav>
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Acceuil</button>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
             </nav>
             <form action="index.php?action=inscription" method="post">
          <div class="center-container2">

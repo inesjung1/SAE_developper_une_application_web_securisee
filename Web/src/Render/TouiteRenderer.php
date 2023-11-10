@@ -82,11 +82,6 @@ class TouiteRenderer implements Renderer{
                         HTML;
                     }
                 }
-                else if($_COOKIE['user'] != 0){
-                    $html .= <<<HTML
-                    <button id="delete" onclick="window.location.href='index.php?action=DeleteTouite&idTouite=$idT&aaction=$action'">Supprimer</button>
-                    HTML;
-                }
                 $html .= <<<HTML
                         </div>
                         <div class="touite-email">$email</div>
@@ -142,8 +137,31 @@ class TouiteRenderer implements Renderer{
                 $html = <<<HTML
                     <div class="touite">
                     <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
-                    <div class="touite-content">$content</div>
+                HTML;
+                if(($_COOKIE['user'] != 0)&&($idU != $monId)){
+                    $sql3 = "SELECT COUNT(*) FROM abonnement WHERE AbonneUtilisateurID = $monId AND SuiviUtilisateurID = $idU;";
+                    $stmt3 = $db->prepare($sql3);
+                    $stmt3->execute();
+                    $abonnements = $stmt3->fetchAll();
+                    $count = $abonnements[0]['COUNT(*)'];
+                    //on verifie que l'utilisateur n'est pas deja abonné
+                    if($count == 0) {
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=Sabonner&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        HTML;
+                    }else{
+                        $html .= <<<HTML
+                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonner&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        HTML;
+                    }
+                }else if($_COOKIE['user'] != 0){
+                    $html .= <<<HTML
+                    <button id="delete" onclick="window.location.href='index.php?action=DeleteTouite&idTouite=$idT&aaction=$action'">Supprimer</button>
                     HTML;
+                }
+                $html .= <<<HTML
+                    <div class="touite-content">$content</div>
+                HTML;
                 if (!empty($image)) {
                     $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
                 }

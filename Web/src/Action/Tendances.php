@@ -4,7 +4,7 @@ namespace Iutncy\Sae\Action;
 
 use Iutncy\Sae\Db\ConnectionFactory;
 use Iutncy\Sae\Render\TouiteRenderer;
-use Iutncy\Sae\Touites\ListTouiteLove;
+use Iutncy\Sae\Touites\ListTouite;
 use Iutncy\Sae\Touites\Touite;
 use Iutncy\Sae\User\User;
 
@@ -16,7 +16,7 @@ class Tendances extends Action
             setcookie('user', "0", time() + 3600, '/');
         }
         $db = ConnectionFactory::makeConnection();
-        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY datePublication DESC";
+        $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY LOVE DESC";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $touites =  $stmt->fetchAll();
@@ -46,7 +46,7 @@ class Tendances extends Action
         $html .= <<<HTML
             </nav>
         HTML;
-        $liTouite = new ListTouiteLove();
+        $liTouite = new ListTouite();
         foreach ($touites as $touite) {
 
             $email = $touite['AdresseEmail'];

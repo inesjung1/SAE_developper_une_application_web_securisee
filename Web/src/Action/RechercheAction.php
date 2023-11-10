@@ -9,6 +9,9 @@ use Iutncy\Sae\Render\TouiteRenderer;
 class RechercheAction extends Action {
     public function __construct() {}
     public function execute(): string {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $recherche = $_GET['recherche'];
         $listRecherche = new ListTouite();
         $db = ConnectionFactory::makeConnection();
@@ -19,15 +22,31 @@ class RechercheAction extends Action {
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $touites = $stmt->fetchAll();
+        $idU = $_COOKIE['user'];
         $html = <<<HTML
-            <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-            <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
-            <button class="btnInscription" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
-            <form action="index.php?action=recherche" method="get">
-                <input type="hidden" value="recherche" name="action">
-                <input type="text" id="recherche" name="recherche" placeholder="Recherche">
-                <input type="submit" value="Recherche">
-            </form>
+                <nav>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <form action="index.php?action=recherche" method="get">
+                    <input class="navi" type="hidden" value="recherche" name="action">
+                    <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche">
+                    <input class="entreeButton navi" type="submit" value="Recherche">
+                </form>
+               HTML;
+        if ($_COOKIE['user'] != 0) {
+            $html .= <<<HTML
+            <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
+            <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
+            <button class="navi" onclick="window.location.href='index.php?action=AbonnementsAction'">Mes Abonnements</button>
+            <button class="navi" onclick="window.location.href='index.php?action=AbonnementsTag'">Mes Tags</button>
+            HTML;
+        }else{
+            $html .= <<<HTML
+            <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
+            <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+            HTML;
+        }
+        $html .= <<<HTML
+            </nav>
         HTML;
         $liTouite = new ListTouite();
         foreach ($touites as $touite) {

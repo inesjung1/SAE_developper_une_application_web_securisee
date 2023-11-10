@@ -30,6 +30,9 @@ class Dispatcher
 
     public function run():void
     {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
             case 'AfficherTouiteAction':
@@ -106,16 +109,6 @@ class Dispatcher
          <div class="header-image">
             <img src="src/LogoA.png" alt="Touiter Logo">
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.php?action=connection">Connexion</a></li>
-                <li><a href="index.php?action=inscription">Inscription</a></li>
-                <li><a href="index.php?action=affichertouite">Touites</a></li>
-                <li><a href="index.php?action=AbonnementsAction">Abonnements</a></li>
-                <li><a href="index.php?action=MesAbonnesAction">Mes Abonnés</a></li>
-                <li><a href="index.php?action=deconnexionaction">Deconnexion</a></li>
-            </ul>
-        </nav>
         </header>
         <main>
             $html

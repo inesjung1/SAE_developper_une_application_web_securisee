@@ -16,11 +16,36 @@ class UtilisateurAction extends Action
 
     public function execute(): string
     {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $idU = $_COOKIE['user'];
             $html = <<<HTML
+                <nav>
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-                <button class="navi" onclick="window.location.href='index.php?action=MesAbonnesAction'">Mes Abonnés</button>
+                <form action="index.php?action=recherche" method="get">
+                    <input class="navi" type="hidden" value="recherche" name="action">
+                    <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche">
+                    <input class="entreeButton navi" type="submit" value="Recherche">
+                </form>
+               HTML;
+            if ($_COOKIE['user'] != 0) {
+                $html .= <<<HTML
+            <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
+            <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
+            <button class="navi" onclick="window.location.href='index.php?action=AbonnementsAction'">Mes Abonnements</button>
+            <button class="navi" onclick="window.location.href='index.php?action=AbonnementsTag'">Mes Tags</button>
             HTML;
+            }else{
+                $html .= <<<HTML
+            <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
+            <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+            HTML;
+            }
+            $html .= <<<HTML
+            </nav>
+        HTML;
             echo $html;
             echo $this->afficherFormulaireTouite();
             echo $this->afficherTouites();

@@ -6,10 +6,14 @@ use Iutncy\Sae\Auth\Auth;
 class InscriptionAction extends Action {
     public function __construct() {}
     public function execute(): string {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
-        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-        <form action="index.php?action=inscription" method="post">
+            <nav>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+            </nav>        <form action="index.php?action=inscription" method="post">
          <div class="center-container2">
             <div class="form-group2">
                 <label for="pseudo">Pseudo</label>

@@ -7,9 +7,14 @@ class ConnectionAction extends Action {
 public function __construct() {}
     public function execute(): string
     {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
-        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+            <nav>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+            </nav>
         <div class="center-container">
             <form action="index.php?action=connection" method="post">
                 <div class="form-group">

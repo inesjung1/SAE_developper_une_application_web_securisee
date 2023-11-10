@@ -11,6 +11,9 @@ class LoveAction
     }
 
     public function execute(): string{
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $db = ConnectionFactory::makeConnection();
         $idUtil = $_GET['idU'];
         $idTouite = $_GET['id'];

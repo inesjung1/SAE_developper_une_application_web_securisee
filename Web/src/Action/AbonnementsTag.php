@@ -11,6 +11,9 @@ use Iutncy\Sae\User\User;
 class AbonnementsTag extends Action
 {
     public function execute(): string {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $db = ConnectionFactory::makeConnection();
         $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID
         INNER JOIN contienttag ON Touite.TouiteID = contienttag.TouiteID

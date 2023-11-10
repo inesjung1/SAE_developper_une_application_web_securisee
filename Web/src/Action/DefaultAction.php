@@ -11,6 +11,9 @@ use Iutncy\Sae\Render\Renderer;
 class DefaultAction extends Action {
     public function __construct() {}
     public function execute(): string {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $db = ConnectionFactory::makeConnection();
         $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID ORDER BY datePublication DESC";
         $stmt = $db->prepare($sql);

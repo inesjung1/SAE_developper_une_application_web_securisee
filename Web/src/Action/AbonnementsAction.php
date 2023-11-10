@@ -11,6 +11,9 @@ use Iutncy\Sae\User\User;
 class AbonnementsAction extends Action
 {
     public function execute(): string {
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $db = ConnectionFactory::makeConnection();
         $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID
         INNER JOIN Abonnement ON Abonnement.SuiviUtilisateurID = Utilisateur.UtilisateurID WHERE Abonnement.AbonneUtilisateurID = ".$_COOKIE['user']." ORDER BY datePublication DESC";

@@ -10,6 +10,9 @@ class Sabonner extends Action{
     }
 
     public function execute(): string{
+        if (!isset($_COOKIE['user'])) {
+            setcookie('user', "0", time() + 3600, '/');
+        }
         $db = ConnectionFactory::makeConnection();
         $idTouite = $_GET['id'];
         $sql0 = "SELECT UtilisateurID FROM Touite WHERE TouiteID = $idTouite;";

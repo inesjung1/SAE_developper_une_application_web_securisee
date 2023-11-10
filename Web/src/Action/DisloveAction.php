@@ -6,6 +6,10 @@ use Iutncy\Sae\Db\ConnectionFactory;
 
 class DisloveAction extends Action
 {
+    public function __construct()
+    {
+    }
+
     public function execute(): string{
         if (!isset($_COOKIE['user'])) {
             setcookie('user', "0", time() + 3600, '/');
@@ -19,20 +23,22 @@ class DisloveAction extends Action
         $opinion = $stmt0->fetch();
         $count = $opinion['COUNT(*)'];
         if($count == 0) {
-            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 0, 1);";
+            $sql = "INSERT INTO Opinion (UtilisateurID, TouiteID, IsLove, IsDislove) VALUES ($idUtil, $idTouite, 0, 0);";
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }
-        $this->ajouterDisloveTouite();
+        $this->ajouterDisLikeTouite();
         $action = base64_decode($_GET['aaction']);
         header('Location: '.$_SERVER['PHP_SELF'].'?'.$action);
         return '';
     }
 
-    public function ajouterDisloveTouite(){
+    public function ajouterDisLikeTouite()
+    {
         $idUtil = $_GET['idU'];
+        $id = $_GET['id'];
         $db = ConnectionFactory::makeConnection();
-        $sql0 = "SELECT * FROM Opinion WHERE UtilisateurID = $idUtil;";
+        $sql0 = "SELECT * FROM Opinion WHERE UtilisateurID = $idUtil AND TouiteID = $id;";
         $stmt0 = $db->prepare($sql0);
         $stmt0->execute();
         $opinion = $stmt0->fetch();
@@ -44,15 +50,16 @@ class DisloveAction extends Action
         $stmt->execute();
         $touite = $stmt->fetch();
         $dislove = $touite['DISLOVE'];
-        if(($isLove == 0)&&($isDislove == 0)){
+
+        if (($isLove == 0) && ($isDislove == 0)) {
             $dislove++;
             $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
             $stmt2->execute();
-            $sql3 = "UPDATE Opinion SET IsDislove = 1 WHERE UtilisateurID = $idUtil;";
+            $sql3 = "UPDATE Opinion SET IsDislove = 1 WHERE UtilisateurID = $idUtil AND TouiteID = $id;";
             $stmt3 = $db->prepare($sql3);
             $stmt3->execute();
-        }else if(($isLove == 1)&&($isDislove == 0)) {
+        } else if (($isLove == 1) && ($isDislove == 0)) {
             $dislove++;
             $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
@@ -62,15 +69,15 @@ class DisloveAction extends Action
             $sql4 = "UPDATE Touite SET LOVE = $love WHERE TouiteID = $id;";
             $stmt4 = $db->prepare($sql4);
             $stmt4->execute();
-            $sql5 = "UPDATE Opinion SET IsDislove = 1, IsLove = 0 WHERE UtilisateurID = $idUtil;";
+            $sql5 = "UPDATE Opinion SET IsLove = 0, IsDislove = 1 WHERE UtilisateurID = $idUtil AND TouiteID = $id;";
             $stmt5 = $db->prepare($sql5);
             $stmt5->execute();
-        }else if(($isLove == 0)&&($isDislove == 1)) {
+        } else if (($isLove == 0) && ($isDislove == 1)) {
             $dislove--;
             $sql2 = "UPDATE Touite SET DISLOVE = $dislove WHERE TouiteID = $id;";
             $stmt2 = $db->prepare($sql2);
             $stmt2->execute();
-            $sql6 = "UPDATE Opinion SET IsDislove = 0 WHERE UtilisateurID = $idUtil;";
+            $sql6 = "UPDATE Opinion SET IsDislove = 0 WHERE UtilisateurID = $idUtil AND TouiteID = $id;";
             $stmt6 = $db->prepare($sql6);
             $stmt6->execute();
         }

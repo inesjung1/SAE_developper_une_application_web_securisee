@@ -15,16 +15,33 @@ class MesStatistiques extends Action
     {
         $html = '';
         $idU = $_COOKIE['user'];
-        $love = $this->recupererLike();
-        $dislove = $this->recupererDislike();
-        $html .= <<<HTML
+        $db = ConnectionFactory::makeConnection();
+        //On récupère le nombre de touite de l'utilisateur
+        $sql = "SELECT COUNT(*) FROM Touite WHERE UtilisateurID = $idU;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $touites = $stmt->fetch();
+        $nbTouites = $touites['COUNT(*)'];
+        if($nbTouites != 0){
+            $love = $this->recupererLike();
+            $dislove = $this->recupererDislike();
+            $html .= <<<HTML
                 <nav>
                     <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
                 </nav>
                 <p>Nombre de Love Moyen : $love</p>
                 <p>Nombre de Dislove Moyen : $dislove</p>
-        HTML;
+            HTML;
+        }else{
+            $html .= <<<HTML
+                <nav>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
+                </nav>
+                <p>Vous n'avez pas encore touité</p>
+            HTML;
+        }
         return $html;
     }
 

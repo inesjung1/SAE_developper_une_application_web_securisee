@@ -1,7 +1,7 @@
 <?php
 
 namespace Iutncy\Sae\Touites;
-
+use Iutncy\Sae\db\ConnectionFactory;
 class ListTouiteLove
 {
     public function __construct()

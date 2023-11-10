@@ -111,7 +111,9 @@ class Dispatcher
             <title>Touiter</title>
       
              <link rel="stylesheet" href="./src/style.css">
-               <img class="headerimage" src="src/logo.png" alt="logo">
+                <a href="index.php?action=defaultaction">
+        <img class="headerimage" src="src/logo.png" alt="logo">
+        </a>
         </head>
         <body>
            <header>

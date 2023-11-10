@@ -163,7 +163,9 @@ class TouiteRenderer implements Renderer{
                     <div class="touite-content">$content</div>
                 HTML;
                 if (!empty($image)) {
-                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
+                    $html .= '<div style="text-align: center;">'; // Ajoutez cette div pour centrer le contenu
+                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="450" height="350"/>';
+                    $html .= '</div>';
                 }
                 if ($tag != ''){
                     $sql6 = "SELECT COUNT(*) FROM abonnementtag WHERE AbonneUtilisateurID = $monId AND abonnementtag.TagID = $tagID;";
@@ -177,11 +179,11 @@ class TouiteRenderer implements Renderer{
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner au #Tag</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner du #Tag</button>
                         HTML;
                     }
                 }

@@ -110,24 +110,47 @@ class UtilisateurAction extends Action
             $filename = basename($_FILES['imageTouite']['name']);
             $uploadDir = 'src/Image/';
             $uploadFile = $uploadDir . $filename;
+
+            // Vérifier si le fichier existe déjà dans la base de données
+            $sqlCheckFile = "SELECT CheminFichier FROM Image WHERE Description = :description";
+            $stmtCheckFile = $db->prepare($sqlCheckFile);
+            $stmtCheckFile->bindValue(':description', $filename);
+            $stmtCheckFile->execute();
+            $existingFile = $stmtCheckFile->fetchColumn();
+
+            if ($existingFile) {
+                // Générer un nouveau nom de fichier unique
+                $newFilename = $this->NomUnique($uploadDir, $filename);
+                $uploadFile = $uploadDir . $newFilename;
+            }
+
             if (getimagesize($_FILES['imageTouite']['tmp_name']) === false) {
                 echo "Le fichier n'est pas une image.";
                 return;
             }
+
             if (file_exists($uploadFile)) {
                 echo "Désolé, le fichier existe déjà.";
                 return;
             }
+
             if (move_uploaded_file($_FILES['imageTouite']['tmp_name'], $uploadFile)) {
-                $sqlImage = "INSERT INTO Image (Description, CheminFichier) VALUES (:description, :chemin)";
-                $stmtImage = $db->prepare($sqlImage);
-                $stmtImage->bindValue(':description', $filename);
-                $stmtImage->bindValue(':chemin', $uploadFile);
-                if ($stmtImage->execute()) {
-                    $imageID = $db->lastInsertId();
+                if (!$existingFile) {
+                    // Enregistrer le nouveau fichier dans la base de données
+                    $sqlImage = "INSERT INTO Image (Description, CheminFichier) VALUES (:description, :chemin)";
+                    $stmtImage = $db->prepare($sqlImage);
+                    $stmtImage->bindValue(':description', $newFilename);
+                    $stmtImage->bindValue(':chemin', $uploadFile);
+                    if ($stmtImage->execute()) {
+                        $imageID = $db->lastInsertId();
+                    } else {
+                        echo "Erreur lors de l'enregistrement de l'image dans la base de données.";
+                        return;
+                    }
                 } else {
-                    echo "Erreur lors de l'enregistrement de l'image dans la base de données.";
-                    return;
+                    // Le fichier existait déjà dans la base de données
+                    // Vous pouvez ici mettre à jour le chemin du fichier si nécessaire.
+                    $imageID = $this->DescriptionImage($filename);
                 }
             } else {
                 echo "Erreur lors de l'upload de l'image.";
@@ -194,6 +217,27 @@ class UtilisateurAction extends Action
         }
     }
 
+    private function nomUnique($repertoireTelechargement, $nomFichier): string
+    {
+        $extension = pathinfo($nomFichier, PATHINFO_EXTENSION);
+        $nomBase = pathinfo($nomFichier, PATHINFO_FILENAME);
+        $nouveauNomFichier = $nomBase . "_" . time() . "." . $extension;
+        while (file_exists($repertoireTelechargement . $nouveauNomFichier)) {
+            $nouveauNomFichier = $nomBase . "_" . time() . "." . $extension;
+        }
+        return $nouveauNomFichier;
+    }
+
+    private function DescriptionImage($description) {
+        $db = ConnectionFactory::makeConnection();
+        $sql = "SELECT ImageID FROM Image WHERE Description = :description";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':description', $description);
+        $stmt->execute();
+        $imageID = $stmt->fetchColumn();
+        return $imageID;
+    }
+
     private function afficherTouites(): string {
         $db = ConnectionFactory::makeConnection();
         $sql = "SELECT * FROM Touite INNER JOIN Utilisateur ON Touite.UtilisateurID = Utilisateur.UtilisateurID
@@ -231,5 +275,6 @@ class UtilisateurAction extends Action
         }
         return $html;
     }
+
 
 }

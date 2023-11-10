@@ -18,6 +18,7 @@ use \Iutncy\Sae\Action\SeDesabonnerTag;
 use \Iutncy\Sae\Action\MesAbonnesAction;
 use \Iutncy\Sae\Action\DeleteTouite;
 use \Iutncy\Sae\Action\AfficherTouiteAction;
+use \Iutncy\Sae\Action\MesStatistiques;
 class Dispatcher
 {
     private $action;
@@ -85,6 +86,9 @@ class Dispatcher
                 break;
             case 'DeleteTouite':
                 $action = new DeleteTouite();
+                break;
+            case 'MesStatistiques':
+                $action = new MesStatistiques();
                 break;
             default:
                 $action = new DefaultAction();

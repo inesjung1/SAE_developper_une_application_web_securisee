@@ -36,6 +36,7 @@ class UtilisateurAction extends Action
             <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
             <button class="navi" onclick="window.location.href='index.php?action=AbonnementsAction'">Mes Abonnements</button>
             <button class="navi" onclick="window.location.href='index.php?action=AbonnementsTag'">Mes Tags</button>
+            <button class="navi" onclick="window.location.href='index.php?action=MesStatistiques'">Mes Statistiques</button>
             HTML;
             }else{
                 $html .= <<<HTML

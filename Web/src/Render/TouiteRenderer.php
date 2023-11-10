@@ -14,10 +14,14 @@ class TouiteRenderer implements Renderer{
         $touite = $this->touite;
         $user = $touite->getAuteur();
         $pseudo = $user->getPseudo();
+        $pseudo = htmlspecialchars($pseudo);
         $email = $user->getEmail();
+        $email = htmlspecialchars($email);
         $idU = $user->getId();
         $content = base64_decode($touite->getTexte());
+        $content = htmlspecialchars($content);
         $date = $touite->getDate();
+        $date = htmlspecialchars($date);
         $idT = $touite->getId();
         $db = ConnectionFactory::makeConnection();
         $sql = "SELECT LOVE, DISLOVE FROM Touite WHERE TouiteID = $idT;";
@@ -40,6 +44,7 @@ class TouiteRenderer implements Renderer{
             $stmt4->execute();
             $v = $stmt4->fetchAll()[0];
             $tag = $v['LIBELLE'];
+            $tag = htmlspecialchars($tag);
             $tagID = $v['TagID'];
         }
         $monId = $_COOKIE['user'];

@@ -23,6 +23,7 @@ use \Iutncy\Sae\Action\MesStatistiques;
 use \Iutncy\Sae\Action\Tendances;
 use \Iutncy\Sae\Action\UtilPopAction;
 use \Iutncy\Sae\Action\AdminAction;
+use \Iutncy\Sae\Action\UtilPopActionAdmin;
 
 class Dispatcher
 {
@@ -41,6 +42,9 @@ class Dispatcher
         }
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
+            case 'UtilPopActionAdmin':
+                $action = new UtilPopActionAdmin();
+                break;
             case 'TendancesAdmin':
                 $action = new TendancesAdmin();
                 break;

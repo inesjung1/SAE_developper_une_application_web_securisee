@@ -27,7 +27,7 @@ class UtilRenderer implements Renderer
                 <div class="touite"  >
                     <div class="touite-header">
                         <div class="touite-pseudo">
-                        <a class="user" href="index.php?action=UtilisateurAction&user=$idU">#$pseudo</a>
+                        <a class="user" href="index.php?action=UtilisateurAction&user=$idU">@$pseudo</a>
                 HTML;
         $html .= <<<HTML
                         </div>

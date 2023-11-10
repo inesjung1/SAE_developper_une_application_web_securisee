@@ -136,7 +136,7 @@ class TouiteRenderer implements Renderer{
             case self::COMPACT:
                 $html = <<<HTML
                     <div class="touite">
-                    <a class="user" href="index.php?action=UtilisateurAction&user=$idU">$pseudo</a>
+                    <a class="user" href="index.php?action=UtilisateurAction&user=$idU">@$pseudo</a>
                 HTML;
                 if(($_COOKIE['user'] != 0)&&($idU != $monId)){
                     $sql3 = "SELECT COUNT(*) FROM abonnement WHERE AbonneUtilisateurID = $monId AND SuiviUtilisateurID = $idU;";

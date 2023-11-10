@@ -14,12 +14,14 @@ class MesStatistiques extends Action
     public function execute(): string
     {
         $html = '';
-        $id = $_COOKIE['user'];
+        $idU = $_COOKIE['user'];
         $love = $this->recupererLike();
         $dislove = $this->recupererDislike();
         $html .= <<<HTML
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-                <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$id'">Mon Profil</button>
+                <nav>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
+                </nav>
                 <p>Nombre de Love Moyen : $love</p>
                 <p>Nombre de Dislove Moyen : $dislove</p>
         HTML;

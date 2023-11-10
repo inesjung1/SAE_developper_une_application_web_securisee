@@ -73,6 +73,7 @@ class UtilisateurAction extends Action
         <div class="center-text">
             <form action="index.php?action=UtilisateurAction&user={$_GET['user']}" method="post" enctype="multipart/form-data">
                 <textarea name="texteTouite" placeholder="Quoi de neuf?" maxlength="235"></textarea>
+                <textarea name="texteTag" placeholder="On rajoute un tag ?"></textarea>
                 <input type="file" name="imageTouite" accept="image/*" />
                 <input type="submit" value="Publier Touite" />
             </form>
@@ -101,6 +102,7 @@ class UtilisateurAction extends Action
     private function traiterTouite(): void
     {
         $texteTouite = $_POST['texteTouite'] ?? '';
+        $texteTag = $_POST['texteTag'] ?? '';
         $db = ConnectionFactory::makeConnection();
         $imageID = null;
 
@@ -134,16 +136,56 @@ class UtilisateurAction extends Action
         }
 
         if (!empty($texteTouite)) {
-            $sqlTouite = "INSERT INTO Touite (Texte, ImageID, DatePublication, UtilisateurID) VALUES (:texte, :imageID, NOW(), :UtilisateurID)";
+            $date = date('Y-m-d');
+            $sqlTouite = "INSERT INTO Touite (Texte, ImageID, DatePublication, UtilisateurID) VALUES (:texte, :imageID, :date, :UtilisateurID)";
             $stmtTouite = $db->prepare($sqlTouite);
             $stmtTouite->bindValue(':texte', base64_encode($texteTouite));
             $stmtTouite->bindValue(':imageID', $imageID, \PDO::PARAM_INT);
+            $stmtTouite->bindValue(':date', $date);
             $stmtTouite->bindValue(':UtilisateurID', $_GET['user']);
 
             if (!$stmtTouite->execute()) {
                 echo "Erreur lors de l'ajout du touite.";
                 print_r($stmtTouite->errorInfo());
             } else {
+
+                if(!empty($texteTag)){
+                    $sql1 = "SELECT count(*) from tag where libelle=:tag;";
+                    $stmt1 = $db->prepare($sql1);
+                    $stmt1->bindValue(':tag', $texteTag);
+                    $stmt1->execute();
+                    $res = $stmt1->fetch()['count(*)'];
+                    if($res==0){
+                        $sql2 = "INSERT INTO tag (libelle,description) VALUES (:libelle,:description)";
+                        $stmt2 = $db->prepare($sql2);
+                        $stmt2->bindValue(':libelle', $texteTag);
+                        $stmt2->bindValue(':description', $texteTag);
+                        $stmt2->execute();
+                    }
+
+                    $sql3 = "SELECT tagID from tag where libelle=:texte;";
+                    $stmt3 = $db->prepare($sql3);
+                    $stmt3->bindValue(':texte', $texteTag);
+                    $stmt3->execute();
+                    $resTag = $stmt3->fetchAll();
+                    var_dump($resTag);
+                    $idTag = $resTag[0]['tagID'];
+
+                    $sqL4 = "SELECT max(TouiteID) from touite where UtilisateurID=:uid;";
+                    $stmt4 = $db->prepare($sqL4);
+                    $stmt4->bindValue(':uid', $_GET['user']);
+                    $stmt4->execute();
+                    $resTouite = $stmt4->fetchAll();
+                    var_dump($resTouite);
+                    $idTouite = $resTouite[0]['max(TouiteID)'];
+                    echo $idTouite;
+
+                    $sql5 = "INSERT INTO contientTag (touiteID, tagID) VALUES (:touite, :tag)";
+                    $stmt5 = $db->prepare($sql5);
+                    $stmt5->bindValue(':touite', $idTouite);
+                    $stmt5->bindValue(':tag', $idTag);
+                    $stmt5->execute();
+                }
                 header('Location: index.php?action=UtilisateurAction&user=' . $_GET['user']);
                 exit;
             }

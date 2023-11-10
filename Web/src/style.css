@@ -2,11 +2,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #000;
 }
 
 body, html {
     height: 100%;
     font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #BFDBF7;
+    border-radius: 3%;
 }
 
 header {
@@ -17,12 +23,11 @@ header {
     text-align: center;
 }
 
-
 .headerimage{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left:50% ;
+    margin-left: 50%;
     max-height: 10%;
 }
 
@@ -32,7 +37,7 @@ nav {
     bottom: 0;
     left: 0;
     width: 200px;
-    background-color: #3DDC97;
+    background-color: #1F7A8C;
     padding: 1rem;
     gap: 1rem;
     overflow-y: auto;
@@ -40,6 +45,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 3%;
 }
 
 nav button.navi2 {
@@ -69,7 +75,6 @@ nav input[type="text"] {
     padding-top: 100px;
     margin-top: 70px;
     margin-left: 220px;
-    padding: 20px;
     overflow-y: auto;
     height: 100vh;
 }
@@ -84,9 +89,22 @@ nav input[type="text"] {
     width: 90%;
     margin-left: 35%;
     max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
 }
 
-#abonnement {
+.touite-content {
+    max-width: 450px;
+    overflow-wrap: break-word;
+    font-size: 15px; /* Nouvelle taille de police */
+    line-height: 1.9; /* Espacement entre les lignes amélioré */
+}
+
+.touite:hover {
+    transform: scale(1.02);
+}
+
+#abonnement{
     position: absolute;
     top: 10px;
     right: 10px;
@@ -97,13 +115,29 @@ nav input[type="text"] {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     cursor: pointer;
     border-radius: 8px;
 }
 
 #abonnement:hover {
     background-color: #0056b3;
+}
+
+#abonnementTag {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
 #delete {
@@ -117,7 +151,7 @@ nav input[type="text"] {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     cursor: pointer;
     border-radius: 8px;
 }
@@ -134,7 +168,7 @@ nav input[type="text"] {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
@@ -148,7 +182,7 @@ nav input[type="text"] {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
@@ -162,17 +196,39 @@ nav input[type="text"] {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     margin: 6px 4px;
     cursor: pointer;
     border-radius: 8px;
 }
+
 #love:hover {
     background-color: darkred;
 }
 
 #dislove:hover {
     background-color: darkgrey;
+}
+
+button.retour {
+    position: absolute;
+    right: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-right: 45%;
+    margin-top: 20%;
+}
+
+button.retour:hover {
+    background-color: #0056b3;
 }
 
 .center-container {
@@ -219,7 +275,6 @@ nav input[type="text"] {
     color: #007bff;
     margin-top: 10%;
     margin-left: 45%;
-
 }
 
 .NbDislove {
@@ -314,23 +369,46 @@ nav input[type="text"] {
 }
 
 .love-icon.loved {
-    color: red; /* Couleur lorsque le cœur est aimé */
+    color: red;
 }
 
 a.user {
-    font-family: 'Arial', sans-serif; /* Choose an appealing font */
-    font-size: 16px; /* Adjust the font size */
-    font-weight: bold; /* Make it bold if desired */
-    text-decoration: none; /* Remove underlines (if any) */
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
 }
-
 
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
+        width: 100%;
     }
 
     .main-content {
         margin: 1rem;
+        margin-top: 80px;
+    }
+
+    button.retour {
+        margin-right: 0;
+    }
+
+    .center-container {
+        height: auto;
+    }
+
+    .center-container2 {
+        margin-left: 0;
+    }
+
+    .form-group2 {
+        width: 100%;
+    }
+
+    .custom-button,
+    .custom-button2 {
+        margin-left: 0;
+        width: 100%;
     }
 }

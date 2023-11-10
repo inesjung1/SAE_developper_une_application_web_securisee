@@ -107,11 +107,11 @@ class TouiteRenderer implements Renderer{
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML
-                        <button id="abonnement" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="abonnement" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
                         HTML;
                     }
                 }

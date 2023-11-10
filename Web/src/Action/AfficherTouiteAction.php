@@ -42,7 +42,7 @@ class AfficherTouiteAction extends Action {
             </nav>
         HTML;
         $html .= <<<HTML
-            <button class="navi" onclick="window.location.href='index.php?
+            <button class="retour" onclick="window.location.href='index.php?
         HTML;
         $html .= base64_decode($_GET['aaction']);
         $html .= <<<HTML

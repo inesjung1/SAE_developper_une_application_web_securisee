@@ -20,6 +20,7 @@ class UtilisateurAction extends Action
             $html = <<<HTML
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                 <button class="navi" onclick="window.location.href='index.php?action=MesAbonnesAction'">Mes Abonnés</button>
+                <button class="navi" onclick="window.location.href='index.php?action=MesStatistiques'">Mes Statistiques</button>
             HTML;
             echo $html;
             echo $this->afficherFormulaireTouite();

@@ -37,6 +37,7 @@ class UtilisateurAction extends Action
             <button class="navi" onclick="window.location.href='index.php?action=AbonnementsAction'">Mes Abonnements</button>
             <button class="navi" onclick="window.location.href='index.php?action=AbonnementsTag'">Mes Tags</button>
             <button class="navi" onclick="window.location.href='index.php?action=MesStatistiques'">Mes Statistiques</button>
+            <button class="navi2" id="btnEcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
             HTML;
             }else{
                 $html .= <<<HTML
@@ -67,28 +68,30 @@ class UtilisateurAction extends Action
             $stmt->execute();
             if ($_COOKIE['user'] == $stmt2->fetch()['UtilisateurID']) {
                 $html = <<<HTML
-            <button id="btnEcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
-            <div id="zoneDeTexteTouite" style="display:none;">
+        <button id="btnEcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
+        <div id="zoneDeTexteTouite" style="display:none;">
+        <div class="center-text">
             <form action="index.php?action=UtilisateurAction&user={$_GET['user']}" method="post" enctype="multipart/form-data">
                 <textarea name="texteTouite" placeholder="Quoi de neuf?" maxlength="235"></textarea>
                 <input type="file" name="imageTouite" accept="image/*" />
                 <input type="submit" value="Publier Touite" />
             </form>
-            </div>
-            <script>
-            function montrerZoneDeTexte() {
-                var zone = document.getElementById('zoneDeTexteTouite');
-                var btn = document.getElementById('btnEcrireTouite');
-                if (zone.style.display === "none") {
-                    zone.style.display = "block";
-                    btn.innerText = "Annuler";
-                } else {
-                    zone.style.display = "none";
-                    btn.innerText = "Écrire Touite";
-                }
+        </div>
+        </div>
+        <script>
+        function montrerZoneDeTexte() {
+            var zone = document.getElementById('zoneDeTexteTouite');
+            var btn = document.getElementById('btnEcrireTouite');
+            if (zone.style.display === "none") {
+                zone.style.display = "block";
+                btn.innerText = "Annuler";
+            } else {
+                zone.style.display = "none";
+                btn.innerText = "Écrire Touite";
             }
-            </script>
-            HTML;
+        }
+        </script>
+        HTML;
                 return $html;
             }
         }

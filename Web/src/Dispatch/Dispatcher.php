@@ -96,7 +96,6 @@ class Dispatcher
         }
         $this->renderPage($action->execute());
     }
-
     private function renderPage(string $html): void
     {
         $base = <<<HTML
@@ -112,6 +111,12 @@ class Dispatcher
              <header>
          <div class="header-image">
             <img src="src/LogoA.png" alt="Touiter Logo">
+        </div>
+        <div class="zoneDeTexteTouite">
+            <form action="index.php?action=AfficherTouiteAction" method="get">
+                <input class="entreeTexte" type="text" name="touite" placeholder="Touite">
+                <input class="entreeButton" type="submit" value="Touiter">
+            </form>
         </div>
         </header>
         <main>

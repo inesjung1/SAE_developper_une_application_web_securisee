@@ -35,6 +35,13 @@ nav {
     gap: 1rem;
     overflow-y: auto;
     z-index: 2000; /* Ensures that the nav is above other content */
+    display: flex;
+    flex-direction: column; /* Change flex direction to column */
+    align-items: center;
+}
+
+nav button.navi2 {
+    margin-top: 10%; /* Push the button to the bottom of the nav */
 }
 
 nav button,
@@ -121,15 +128,15 @@ nav input[type="text"] {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 8px; /* Coins arrondis pour un look moderne */
+    border-radius: 8px;
 }
 
 #love:hover {
-    background-color: darkred; /* Changement de couleur au survol pour le bouton Love */
+    background-color: darkred;
 }
 
 #dislove:hover {
-    background-color: darkgrey; /* Changement de couleur au survol pour le bouton Dislove */
+    background-color: darkgrey;
 }
 
 .header-image img {
@@ -241,6 +248,12 @@ nav input[type="text"] {
     transition: background-color 0.3s ease-in-out;
 }
 
+.center-text {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Use the full viewport height */
+}
 
 /* Au survol, changez la couleur de fond du bouton */
 .custom-button:hover {

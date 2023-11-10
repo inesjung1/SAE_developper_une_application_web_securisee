@@ -119,14 +119,14 @@ class TouiteRenderer implements Renderer{
                 }
                     if ($_COOKIE['user']!=0){
                         $html .= <<<HTML
-                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
-                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">❤️ : $love</button>
+                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">💔: $dislove</button>
                         <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">afficher</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="love">Love : $love</button>
-                        <button id="dislove">Dislove : $dislove</button>
+                        <button id="love">❤️ : $love</button>
+                        <button id="dislove">💔: $dislove</button>
                         <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">afficher</button>
 
                         HTML;
@@ -193,14 +193,14 @@ class TouiteRenderer implements Renderer{
                 }
                 if ($_COOKIE['user']!=0){
                     $html .= <<<HTML
-                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
-                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
+                        <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">❤️ : $love</button>
+                        <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">💔 : $dislove</button>
                         <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">+</button>
                         HTML;
                 }else{
                     $html .= <<<HTML
-                        <button id="love">Love : $love</button>
-                        <button id="dislove">Dislove : $dislove</button>
+                        <button id="love">❤️: $love</button>
+                        <button id="dislove">💔: $dislove</button>
                         <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">+</button>
                         HTML;
                 }

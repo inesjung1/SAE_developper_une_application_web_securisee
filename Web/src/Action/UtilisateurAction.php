@@ -81,26 +81,32 @@ class UtilisateurAction extends Action
                 $html = <<<HTML
         <button id="EcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
         <div id="zoneDeTexteTouite" style="display:none;">
-        <div class="center-text">
+        <div class="centertext">
             <form action="index.php?action=UtilisateurAction&user={$_GET['user']}" method="post" enctype="multipart/form-data">
                 <textarea name="texteTouite" placeholder="Quoi de neuf?" maxlength="235"></textarea>
                 <textarea name="texteTag" placeholder="On rajoute un tag ?"></textarea>
-                <input type="file" name="imageTouite" accept="image/*" />
+               <label for="imageTouite" class="custom-file-upload">
+                Choisir un fichier
+                <input type="file" name="imageTouite" id="imageTouite" accept="image/*" style="display:none;">
+                </label>
                 <input type="submit" value="Publier Touite" />
             </form>
         </div>
         </div>
         <script>
-        function montrerZoneDeTexte() {
-            var zone = document.getElementById('zoneDeTexteTouite');
-            var btn = document.getElementById('btnEcrireTouite');
-            if (zone.style.display === "none") {
-                zone.style.display = "block";
-                btn.innerText = "Annuler";
-            } else {
-                zone.style.display = "none";
-                btn.innerText = "Écrire Touite";
-            }
+         function montrerZoneDeTexte() {
+        var zoneTexte = document.getElementById('zoneDeTexteTouite');
+        var zoneTouites = document.getElementById('zoneTouites');
+        var btnEcrireTouite = document.getElementById('btnEcrireTouite');
+        if (zoneTexte.style.display === "none") {
+            zoneTexte.style.display = "block";
+            zoneTouites.style.display = "none";
+            btnEcrireTouite.innerText = "Annuler";
+        } else {
+            zoneTexte.style.display = "none";
+            zoneTouites.style.display = "block";
+            btnEcrireTouite.innerText = "Écrire Touite";
+        }
         }
         </script>
         HTML;
@@ -118,40 +124,26 @@ class UtilisateurAction extends Action
         $imageID = null;
 
         if (isset($_FILES['imageTouite']) && $_FILES['imageTouite']['error'] == UPLOAD_ERR_OK) {
-            $filename = basename($_FILES['imageTouite']['name']);
-            $uploadDir = 'src/Image/';
-            $uploadFile = $uploadDir . $filename;
+            $nomFichier = basename($_FILES['imageTouite']['name']);
+            $repertoireTelechargement = 'src/Image/';
+            $cheminFichier = $repertoireTelechargement . $nomFichier;
 
-            // Vérifier si le fichier existe déjà dans la base de données
-            $sqlCheckFile = "SELECT CheminFichier FROM Image WHERE Description = :description";
-            $stmtCheckFile = $db->prepare($sqlCheckFile);
-            $stmtCheckFile->bindValue(':description', $filename);
-            $stmtCheckFile->execute();
-            $existingFile = $stmtCheckFile->fetchColumn();
+            $sqlVerifFichier = "SELECT CheminFichier FROM Image WHERE Description = :description";
+            $stmtVerifFichier = $db->prepare($sqlVerifFichier);
+            $stmtVerifFichier->bindValue(':description', $nomFichier);
+            $stmtVerifFichier->execute();
+            $fichierExistant = $stmtVerifFichier->fetchColumn();
 
-            if ($existingFile) {
-                // Générer un nouveau nom de fichier unique
-                $newFilename = $this->NomUnique($uploadDir, $filename);
-                $uploadFile = $uploadDir . $newFilename;
-            }
+            if ($fichierExistant) {
+                $nouveauNomFichier = $this->nomUnique($repertoireTelechargement, $nomFichier);
+                $cheminFichier = $repertoireTelechargement . $nouveauNomFichier;
 
-            if (getimagesize($_FILES['imageTouite']['tmp_name']) === false) {
-                echo "Le fichier n'est pas une image.";
-                return;
-            }
-
-            if (file_exists($uploadFile)) {
-                echo "Désolé, le fichier existe déjà.";
-                return;
-            }
-
-            if (move_uploaded_file($_FILES['imageTouite']['tmp_name'], $uploadFile)) {
-                if (!$existingFile) {
-                    // Enregistrer le nouveau fichier dans la base de données
+                if (move_uploaded_file($_FILES['imageTouite']['tmp_name'], $cheminFichier)) {
                     $sqlImage = "INSERT INTO Image (Description, CheminFichier) VALUES (:description, :chemin)";
                     $stmtImage = $db->prepare($sqlImage);
-                    $stmtImage->bindValue(':description', $newFilename);
-                    $stmtImage->bindValue(':chemin', $uploadFile);
+                    $stmtImage->bindValue(':description', $nouveauNomFichier);
+                    $stmtImage->bindValue(':chemin', $cheminFichier);
+
                     if ($stmtImage->execute()) {
                         $imageID = $db->lastInsertId();
                     } else {
@@ -159,13 +151,9 @@ class UtilisateurAction extends Action
                         return;
                     }
                 } else {
-                    // Le fichier existait déjà dans la base de données
-                    // Vous pouvez ici mettre à jour le chemin du fichier si nécessaire.
-                    $imageID = $this->DescriptionImage($filename);
+                    echo "Erreur lors du déplacement du fichier.";
+                    return;
                 }
-            } else {
-                echo "Erreur lors de l'upload de l'image.";
-                return;
             }
         }
 

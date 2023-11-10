@@ -31,6 +31,52 @@ header {
     max-height: 10%;
 }
 
+.centertext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    margin-bottom: 10px;
+    margin-left: 10%;
+}
+textarea[name="texteTouite"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    margin-top: 10px;
+}
+textarea[name="texteTag"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    resize: vertical;
+}
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
 nav {
     position: fixed;
     top: 0;
@@ -45,7 +91,6 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 3%;
 }
 
 nav button.navi2 {
@@ -98,6 +143,7 @@ nav input[type="text"] {
     overflow-wrap: break-word;
     font-size: 15px;
     line-height: 1.9;
+    marge-left: 20%;
 }
 
 .touite:hover {
@@ -124,10 +170,10 @@ nav input[type="text"] {
     background-color: #0056b3;
 }
 
-#abonnementTag {
+#aTag {
     position: absolute;
-    top: 60px;
-    right: 10px;
+    top: 10px;
+    right: 30%;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -140,7 +186,7 @@ nav input[type="text"] {
     border-radius: 8px;
 }
 
-#abonnementTag:hover {
+#aTag:hover {
     background-color: #0056b3;
 }
 
@@ -206,6 +252,9 @@ nav input[type="text"] {
     border-radius: 8px;
 }
 
+#afficher:hover {
+    background-color: darkred;
+}
 #love:hover {
     background-color: darkred;
 }
@@ -228,7 +277,7 @@ button.retour {
     cursor: pointer;
     border-radius: 8px;
     margin-right: 45%;
-    margin-top: 20%;
+    margin-top: 35%;
 }
 
 button.retour:hover {
@@ -378,11 +427,21 @@ button.retour:hover {
 
 a.user {
     font-family: 'Arial', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     text-decoration: none;
+    color:GREEN;
 }
 
+.touitetag {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+.touitetag:hover {
+    color: #0056b3;
+}
 @media (max-width: 768px) {
     nav {
         flex-direction: column;

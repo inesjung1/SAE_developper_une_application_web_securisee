@@ -91,7 +91,9 @@ class TouiteRenderer implements Renderer{
                 HTML;
                 //On affiche l'image si elle existe
                 if (!empty($image)) {
-                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
+                    $html .= '<div style="text-align: center;">'; // Ajoutez cette div pour centrer le contenu
+                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="550" height="350"/>';
+                    $html .= '</div>';
                 }
                 // On affiche le tag si il existe
 
@@ -107,11 +109,11 @@ class TouiteRenderer implements Renderer{
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        <button id="aTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        <button id="aTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
                         HTML;
                     }
                 }
@@ -119,13 +121,13 @@ class TouiteRenderer implements Renderer{
                         $html .= <<<HTML
                         <button id="love" onclick="window.location.href='index.php?action=loveaction&id=$idT&idU=$monId&aaction=$action'">Love : $love</button>
                         <button id="dislove" onclick="window.location.href='index.php?action=disloveaction&id=$idT&idU=$monId&aaction=$action'">Dislove : $dislove</button>
-                        <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">+</button>
+                        <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">afficher</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
                         <button id="love">Love : $love</button>
                         <button id="dislove">Dislove : $dislove</button>
-                        <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">+</button>
+                        <button id="afficher" onclick="window.location.href='index.php?action=AfficherTouiteAction&id=$idT&aaction=$action'">afficher</button>
 
                         HTML;
                     }
@@ -164,7 +166,7 @@ class TouiteRenderer implements Renderer{
                 HTML;
                 if (!empty($image)) {
                     $html .= '<div style="text-align: center;">'; // Ajoutez cette div pour centrer le contenu
-                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="450" height="350"/>';
+                    $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="250" height="150"/>';
                     $html .= '</div>';
                 }
                 if ($tag != ''){
@@ -174,16 +176,18 @@ class TouiteRenderer implements Renderer{
                     $abonnements = $stmt6->fetchAll();
                     $count = $abonnements[0]['COUNT(*)'];
                     $html .= <<<HTML
-                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">#$tag</a></div>
+                        <div class="touitetag">
+                        <a class="touitetag" href="index.php?action=recherche&recherche=$tag">#$tag</a>
+                        </div>
                     HTML;
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner au #Tag</button>
+                        <button id="aTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner au #Tag</button>
                         HTML;
                     }else{
                         $html .= <<<HTML
-                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner du #Tag</button>
+                        <button id="aTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner du #Tag</button>
                         HTML;
                     }
                 }

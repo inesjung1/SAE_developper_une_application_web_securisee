@@ -1,14 +1,16 @@
 <?php
-declare(strict_types=1);
+
 namespace Iutncy\Sae\Action;
+
 use Iutncy\Sae\Db\ConnectionFactory;
-use Iutncy\Sae\Touites\ListTouite;
+use Iutncy\Sae\Render\TouiteRenderer;
+use Iutncy\Sae\Touites\ListTouiteLove;
 use Iutncy\Sae\Touites\Touite;
 use Iutncy\Sae\User\User;
-use Iutncy\Sae\Render\TouiteRenderer;
-use Iutncy\Sae\Render\ListTouiteRenderer;
-use Iutncy\Sae\Render\Renderer;
-class DefaultAction extends Action {
+
+
+class Tendances extends Action
+{
     public function __construct() {}
     public function execute(): string {
         if (!isset($_COOKIE['user'])) {
@@ -45,7 +47,7 @@ class DefaultAction extends Action {
         $html .= <<<HTML
             </nav>
         HTML;
-        $liTouite = new ListTouite();
+        $liTouite = new ListTouiteLove();
         foreach ($touites as $touite) {
 
             $email = $touite['AdresseEmail'];
@@ -75,4 +77,5 @@ class DefaultAction extends Action {
         }
         return $html;
     }
+
 }

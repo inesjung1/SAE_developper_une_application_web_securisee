@@ -19,6 +19,7 @@ use \Iutncy\Sae\Action\MesAbonnesAction;
 use \Iutncy\Sae\Action\DeleteTouite;
 use \Iutncy\Sae\Action\AfficherTouiteAction;
 use \Iutncy\Sae\Action\MesStatistiques;
+use \Iutncy\Sae\Action\Tendances;
 class Dispatcher
 {
     private $action;
@@ -89,6 +90,9 @@ class Dispatcher
                 break;
             case 'MesStatistiques':
                 $action = new MesStatistiques();
+                break;
+            case 'Tendances':
+                $action = new Tendances();
                 break;
             default:
                 $action = new DefaultAction();

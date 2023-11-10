@@ -58,9 +58,9 @@ class Dispatcher
             case 'loveaction':
                 $action = new LoveAction();
                 break;
-                case 'disloveaction':
-                    $action = new DisloveAction();
-                    break;
+            case 'disloveaction':
+                $action = new DisloveAction();
+                break;
             case 'deconnexionaction':
                 $action = new DeconnexionAction();
                 break;

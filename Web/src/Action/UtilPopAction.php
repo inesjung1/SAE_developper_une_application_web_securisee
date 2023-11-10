@@ -26,7 +26,7 @@ class UtilPopAction extends Action
         $res = $stmt->fetchAll();
         $star = [];
         for($i=0;$i<3;$i++){
-            $star[$i] = $res[$i]['adresseemail'];
+            $star[$i] = $res[$i]['AdresseEmail'];
         }
     }
 }

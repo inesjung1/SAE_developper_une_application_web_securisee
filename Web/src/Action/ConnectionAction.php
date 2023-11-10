@@ -55,7 +55,7 @@ public function __construct() {}
                     <nav>
                         <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     </nav>
-                    <p class="success-message">Erreur de connection</p>
+                    <p class="error-message">Erreur de connection</p>
                 HTML;
             }
         }

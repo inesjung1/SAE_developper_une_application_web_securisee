@@ -12,16 +12,18 @@ body, html {
 header {
     position: fixed;
     top: 0;
-    background-color: #FF495C;
-    padding: 0.1rem 0; /* You might want to set a fixed height here instead of padding */
+    background-color: transparent;
+    padding: 0.1rem 0;
     text-align: center;
-    z-index: 1000;
 }
 
-.header-image img {
-    height: 4rem; /* This sets the image height to be 4rem. Adjust as needed. */
-    width: auto; /* This maintains the aspect ratio of the image */
-    max-height: 80%; /* This ensures the image is not taller than the header */
+
+.headerimage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:50% ;
+    max-height: 10%;
 }
 
 nav {
@@ -34,14 +36,14 @@ nav {
     padding: 1rem;
     gap: 1rem;
     overflow-y: auto;
-    z-index: 2000; /* Ensures that the nav is above other content */
+    z-index: 2000;
     display: flex;
-    flex-direction: column; /* Change flex direction to column */
+    flex-direction: column;
     align-items: center;
 }
 
 nav button.navi2 {
-    margin-top: 10%; /* Push the button to the bottom of the nav */
+    margin-top: 10%;
 }
 
 nav button,
@@ -54,8 +56,8 @@ nav input[type="submit"] {
     border-radius: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    width: 100%; /* Définit la largeur des boutons à 100% */
-    margin-top: 10px; /* Ajoutez cette ligne pour définir la marge supérieure */
+    width: 100%;
+    margin-top: 10px;
 }
 
 nav input[type="text"] {
@@ -64,30 +66,31 @@ nav input[type="text"] {
 }
 
 .main-content {
-    margin-left: 220px; /* Increase this if the nav is still overlapping */
+    padding-top: 100px;
+    margin-top: 70px;
+    margin-left: 220px;
     padding: 20px;
     overflow-y: auto;
     height: 100vh;
 }
 
 .touite {
-    position: relative; /* Ajoutez cette ligne pour permettre un positionnement relatif */
+    position: relative;
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 10px;
-    width: 100%;
-    margin-left: 40%;
-    margin-top: 1%;
+    width: 90%;
+    margin-left: 35%;
     max-width: 600px;
 }
 
 #abonnement {
-    position: absolute; /* Positionnement absolu */
-    top: 10px; /* Ajustez la valeur top selon votre préférence */
-    right: 10px; /* Ajustez la valeur right selon votre préférence */
-    background-color: #007BFF; /* Couleur de fond du bouton d'abonnement */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007BFF;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -100,28 +103,48 @@ nav input[type="text"] {
 }
 
 #abonnement:hover {
-    background-color: #0056b3; /* Changement de couleur au survol */
+    background-color: #0056b3;
+}
+
+#delete {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#delete:hover {
+    background-color: #0056b3;
 }
 
 #love {
-    background-color: red; /* Couleur de fond rouge */
-    color: white; /* Texte en blanc pour une meilleure lisibilité */
-    border: none; /* Suppression de la bordure */
-    padding: 10px 20px; /* Espacement intérieur pour rendre le bouton plus grand */
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 8px; /* Coins arrondis pour un look moderne */
+    border-radius: 8px;
 }
 
 #dislove {
-    background-color: grey; /* Couleur de fond grise */
-    color: white; /* Texte en blanc pour une meilleure lisibilité */
-    border: none; /* Suppression de la bordure */
-    padding: 10px 20px; /* Espacement intérieur pour rendre le bouton plus grand */
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -137,10 +160,6 @@ nav input[type="text"] {
 
 #dislove:hover {
     background-color: darkgrey;
-}
-
-.header-image img {
-    max-height: 100px;
 }
 
 .center-container {
@@ -172,17 +191,30 @@ nav input[type="text"] {
 }
 
 .form-group input[type="submit"] {
-    flex-basis: 100%; /* Définit la largeur du bouton à 100% */
+    flex-basis: 100%;
 }
 
 .success-message {
-    font-size: 24px; /* Taille de la police du message */
-    color: #007bff; /* Couleur du texte du message */
-    margin-top: 20px; /* Espacement supplémentaire par rapport au formulaire */
+    font-size: 24px;
+    color: #007bff;
+    margin-top: 20px;
+    margin-left: 9%;
+}
+
+.NbLove {
+    font-size: 24px;
+    color: #007bff;
+    margin-top: 10%;
+    margin-left: 45%;
+
+}
+
+.NbDislove {
+    font-size: 24px;
+    color: #007bff;
     margin-left: 45%;
 }
 
-/* Styles pour le bouton "Connection" */
 .custom-button {
     background-color: #007bff;
     color: #fff;
@@ -250,15 +282,35 @@ nav input[type="text"] {
 
 .center-text {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Use the full viewport height */
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
 }
 
-/* Au survol, changez la couleur de fond du bouton */
 .custom-button:hover {
     background-color: #0056b3;
 }
+
+.love-icon {
+    cursor: pointer;
+}
+
+.love-icon i {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.love-icon.loved {
+    color: red; /* Couleur lorsque le cœur est aimé */
+}
+
+a.user {
+    font-family: 'Arial', sans-serif; /* Choose an appealing font */
+    font-size: 16px; /* Adjust the font size */
+    font-weight: bold; /* Make it bold if desired */
+    text-decoration: none; /* Remove underlines (if any) */
+}
+
 
 @media (max-width: 768px) {
     nav {

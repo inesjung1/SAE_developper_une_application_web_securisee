@@ -109,20 +109,19 @@ class Dispatcher
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Touiter</title>
+      
              <link rel="stylesheet" href="./src/style.css">
+               <img class="headerimage" src="src/logo.png" alt="logo">
         </head>
         <body>
-             <header>
-         <div class="header-image">
-            <img src="src/LogoA.png" alt="Touiter Logo">
-        </div>
-        <div class="zoneDeTexteTouite">
-            <form action="index.php?action=AfficherTouiteAction" method="get">
-                <input class="entreeTexte" type="text" name="touite" placeholder="Touite">
-                <input class="entreeButton" type="submit" value="Touiter">
-            </form>
-        </div>
-        </header>
+           <header>
+        <div class="imagecontainer">
+    </div>
+    <div class="zoneDeTexteTouite">
+        <form action="index.php?action=AfficherTouiteAction" method="get">
+        </form>
+    </div>
+    </header>
         <main>
             $html
         </main>
@@ -132,4 +131,5 @@ class Dispatcher
         echo $base;
     }
 }
+
 

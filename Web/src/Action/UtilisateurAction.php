@@ -68,7 +68,7 @@ class UtilisateurAction extends Action
             $stmt->execute();
             if ($_COOKIE['user'] == $stmt2->fetch()['UtilisateurID']) {
                 $html = <<<HTML
-        <button id="btnEcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
+        <button id="EcrireTouite" onclick="montrerZoneDeTexte()">Écrire Touite</button>
         <div id="zoneDeTexteTouite" style="display:none;">
         <div class="center-text">
             <form action="index.php?action=UtilisateurAction&user={$_GET['user']}" method="post" enctype="multipart/form-data">

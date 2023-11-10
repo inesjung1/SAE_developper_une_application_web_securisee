@@ -30,8 +30,8 @@ class MesStatistiques extends Action
                     <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
                     <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
                 </nav>
-                <p>Nombre de Love Moyen : $love</p>
-                <p>Nombre de Dislove Moyen : $dislove</p>
+                <p class="NbLove">Nombre de Love Moyen : $love</p>
+                <p class="NbDislove">Nombre de Dislove Moyen : $dislove</p>
             HTML;
         }else{
             $html .= <<<HTML

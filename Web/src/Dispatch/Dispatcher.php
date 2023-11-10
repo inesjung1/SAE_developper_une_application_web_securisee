@@ -92,21 +92,38 @@ class Dispatcher
 
     private function renderPage(string $html): void
     {
-        $base = <<< HTML
-            <html>
-            <head>
+        $base = <<<HTML
+          <!DOCTYPE html>
+          <html lang="fr">
+          <head>
             <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Touiter</title>
-            <link rel="stylesheet" href="./src/style.css">
-            </head>
-            <body>
-             <section>$html
-            </section>
-            </body>
-            </head>
-            </html>
-        HTML;
-
+             <link rel="stylesheet" href="./src/style.css">
+        </head>
+        <body>
+             <header>
+         <div class="header-image">
+            <img src="src/LogoA.png" alt="Touiter Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php?action=connection">Connexion</a></li>
+                <li><a href="index.php?action=inscription">Inscription</a></li>
+                <li><a href="index.php?action=affichertouite">Touites</a></li>
+                <li><a href="index.php?action=AbonnementsAction">Abonnements</a></li>
+                <li><a href="index.php?action=MesAbonnesAction">Mes Abonnés</a></li>
+                <li><a href="index.php?action=deconnexionaction">Deconnexion</a></li>
+            </ul>
+        </nav>
+        </header>
+        <main>
+            $html
+        </main>
+        </body>
+        </html>
+    HTML;
         echo $base;
     }
 }
+

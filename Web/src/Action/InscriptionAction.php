@@ -8,23 +8,34 @@ class InscriptionAction extends Action {
     public function execute(): string {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-                <form action="index.php?action=inscription" method="post">
-                    <label for="pseudo">Pseudo</label>
-                    <input type="text" id="pseudo" name="pseudo" required>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" required>
-                    <label for="Nom">Nom</label>
-                    <input type="text" id="Nom" name="Nom" required>
-                    <label for="Prenom">Prenom</label>
-                    <input type="text" id="Prenom" name="Prenom" required>
-                    
-                    <input type="submit" value="Inscription">
-                    
-                </form>
-            HTML;
+        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+        <form action="index.php?action=inscription" method="post">
+         <div class="center-container2">
+            <div class="form-group2">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" required>
+            </div>
+            <div class="form-group2">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group2">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group2">
+                <label for="Nom">Nom</label>
+                <input type="text" id="Nom" name="Nom" required>
+            </div>
+            <div class="form-group2">
+                <label for="Prenom">Prenom</label>
+                <input type="text" id="Prenom" name="Prenom" required>
+            </div>
+            
+            <input type="submit" value="Inscription" class="custom-button2">
+        </form>
+    </div>
+    HTML;
         } else {
             $pseudo = $_POST['pseudo'];
             $email = $_POST['email'];

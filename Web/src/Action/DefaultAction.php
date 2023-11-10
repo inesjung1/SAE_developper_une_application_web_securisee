@@ -20,6 +20,10 @@ class DefaultAction extends Action {
         $stmt->execute();
         $touites =  $stmt->fetchAll();
         $idU = $_COOKIE['user'];
+        $sql3 = "SELECT UtilisateurIDAdmin FROM ADMIN";
+        $stmt3 = $db->prepare($sql3);
+        $stmt3->execute();
+        $admin = $stmt3->fetch()['UtilisateurIDAdmin'];
         $html = <<<HTML
                 <nav>
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
@@ -33,6 +37,13 @@ class DefaultAction extends Action {
             $html .= <<<HTML
             <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
             <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
+            HTML;
+            if ($admin == $_COOKIE['user']) {
+                $html .= <<<HTML
+                <button class="navi" onclick="window.location.href='index.php?action=AdminAction'">ADMIN</button>
+                HTML;
+            }
+            $html .= <<<HTML
             <button class="navi" onclick="window.location.href='index.php?action=Tendances'">Tendances</button>
             <button class="navi" onclick="window.location.href='index.php?action=UtilPopAction'">Influenceurs</button>
             HTML;

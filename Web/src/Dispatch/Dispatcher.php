@@ -4,6 +4,7 @@ use \Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 use \Iutncy\Sae\Action\InscriptionAction;
 use \Iutncy\Sae\Action\ShowTouite;
+use Iutncy\Sae\Action\TendancesAdmin;
 use \Iutncy\Sae\Action\UtilisateurAction;
 use \Iutncy\Sae\Action\RechercheAction;
 use \Iutncy\Sae\Action\LoveAction;
@@ -21,6 +22,7 @@ use \Iutncy\Sae\Action\AfficherTouiteAction;
 use \Iutncy\Sae\Action\MesStatistiques;
 use \Iutncy\Sae\Action\Tendances;
 use \Iutncy\Sae\Action\UtilPopAction;
+use \Iutncy\Sae\Action\AdminAction;
 
 class Dispatcher
 {
@@ -39,6 +41,12 @@ class Dispatcher
         }
         // Utilise un switch pour déterminer quelle classe Action instancier
         switch ($this->action) {
+            case 'TendancesAdmin':
+                $action = new TendancesAdmin();
+                break;
+            case 'AdminAction':
+                    $action = new AdminAction();
+                break;
             case 'AfficherTouiteAction':
                 $action = new AfficherTouiteAction();
                 break;

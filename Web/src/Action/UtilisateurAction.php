@@ -168,7 +168,6 @@ class UtilisateurAction extends Action
                     $stmt3->bindValue(':texte', $texteTag);
                     $stmt3->execute();
                     $resTag = $stmt3->fetchAll();
-                    var_dump($resTag);
                     $idTag = $resTag[0]['tagID'];
 
                     $sqL4 = "SELECT max(TouiteID) from touite where UtilisateurID=:uid;";
@@ -176,9 +175,7 @@ class UtilisateurAction extends Action
                     $stmt4->bindValue(':uid', $_GET['user']);
                     $stmt4->execute();
                     $resTouite = $stmt4->fetchAll();
-                    var_dump($resTouite);
                     $idTouite = $resTouite[0]['max(TouiteID)'];
-                    echo $idTouite;
 
                     $sql5 = "INSERT INTO contientTag (touiteID, tagID) VALUES (:touite, :tag)";
                     $stmt5 = $db->prepare($sql5);

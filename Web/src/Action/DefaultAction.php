@@ -34,12 +34,14 @@ class DefaultAction extends Action {
             <button class="navi" onclick="window.location.href='index.php?action=deconnexionaction'">Deconnexion</button>
             <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
             <button class="navi" onclick="window.location.href='index.php?action=Tendances'">Tendances</button>
+            <button class="navi" onclick="window.location.href='index.php?action=UtilPopAction'">Influenceurs</button>
             HTML;
         }else{
             $html .= <<<HTML
             <button class="navi" onclick="window.location.href='index.php?action=connection'">Connexion</button>
             <button class="navi" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
             <button class="navi" onclick="window.location.href='index.php?action=Tendances'">Tendances</button>
+            <button class="navi" onclick="window.location.href='index.php?action=UtilPopAction'">Influenceurs</button>
             HTML;
         }
         $html .= <<<HTML

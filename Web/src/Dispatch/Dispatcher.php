@@ -1,6 +1,6 @@
 <?php
 namespace Iutncy\Sae\Dispatch;
-use Iutncy\Sae\Action\ConnectionAction;
+use \Iutncy\Sae\Action\ConnectionAction;
 use \Iutncy\Sae\Action\DefaultAction;
 use \Iutncy\Sae\Action\InscriptionAction;
 use \Iutncy\Sae\Action\ShowTouite;
@@ -20,6 +20,8 @@ use \Iutncy\Sae\Action\DeleteTouite;
 use \Iutncy\Sae\Action\AfficherTouiteAction;
 use \Iutncy\Sae\Action\MesStatistiques;
 use \Iutncy\Sae\Action\Tendances;
+use \Iutncy\Sae\Action\UtilPopAction;
+
 class Dispatcher
 {
     private $action;
@@ -93,6 +95,9 @@ class Dispatcher
                 break;
             case 'Tendances':
                 $action = new Tendances();
+                break;
+            case 'UtilPopAction':
+                $action = new UtilPopAction();
                 break;
             default:
                 $action = new DefaultAction();

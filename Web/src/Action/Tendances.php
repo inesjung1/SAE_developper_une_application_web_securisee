@@ -8,7 +8,6 @@ use Iutncy\Sae\Touites\ListTouiteLove;
 use Iutncy\Sae\Touites\Touite;
 use Iutncy\Sae\User\User;
 
-
 class Tendances extends Action
 {
     public function __construct() {}

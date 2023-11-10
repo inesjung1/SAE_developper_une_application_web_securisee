@@ -17,6 +17,7 @@ class UtilisateurAction extends Action
 
     public function execute(): string
     {
+        $html = '';
         if (!isset($_COOKIE['user'])) {
             setcookie('user', "0", time() + 3600, '/');
         }

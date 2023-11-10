@@ -126,7 +126,7 @@ nav input[type="text"] {
 
 #abonnementTag {
     position: absolute;
-    top: 40px;
+    top: 60px;
     right: 10px;
     background-color: #007BFF;
     color: white;
@@ -138,6 +138,10 @@ nav input[type="text"] {
     font-size: 10px;
     cursor: pointer;
     border-radius: 8px;
+}
+
+#abonnementTag:hover {
+    background-color: #0056b3;
 }
 
 #delete {

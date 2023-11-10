@@ -442,6 +442,40 @@ a.user {
 .touitetag:hover {
     color: #0056b3;
 }
+.inscriptionOk{
+    margin-top: 10%;
+    margin-left: 39%;
+    font-size: 24px;
+    color: green;
+    display: inline-block;
+    animation: blink 1s infinite alternate;
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.inscriptionNo{
+    margin-top: 10%;
+    margin-left: 45%;
+    font-size: 24px;
+    color: red;
+    display: inline-block;
+    animation: blink 1s infinite alternate;
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
     nav {
         flex-direction: column;

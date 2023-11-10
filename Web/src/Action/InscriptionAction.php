@@ -1,10 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace Iutncy\Sae\Action;
-use Iutncy\Sae\User\User;
+use Iutncy\Sae\Exception\AuthException;
 use Iutncy\Sae\Auth\Auth;
 class InscriptionAction extends Action {
     public function __construct() {}
+
+    /**
+     * @throws AuthException
+     */
     public function execute(): string {
         if (!isset($_COOKIE['user'])) {
             setcookie('user', "0", time() + 3600, '/');
@@ -36,7 +40,6 @@ class InscriptionAction extends Action {
                 <label for="Prenom">Prenom</label>
                 <input type="text" id="Prenom" name="Prenom" required>
             </div>
-            
             <input type="submit" value="Inscription" class="custom-button2">
         </form>
     </div>
@@ -47,32 +50,30 @@ class InscriptionAction extends Action {
             $password = $_POST['password'];
             $nom = $_POST['Nom'];
             $prenom = $_POST['Prenom'];
-            
             $Auth = new Auth();
             if($Auth->register($pseudo, $email, $password,$nom,$prenom)){
                 $html = <<<HTML
+                <div>
                 <nav>
                     <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
+                    <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connexion</button>
                 </nav>
-                <p>Vous êtes bien inscrit </p>
-                <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
+                <div>
+                <p class="inscriptionOk">Bienvenue sur l'application ! Vous êtes bien inscrit.</p>
+            </div>
             HTML;
             }else{
                 $html = <<<HTML
-                <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
-                </nav>
-                <p>Erreur lors de l'inscription</p>
-                <button class="btnConnection" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
-            HTML;
+                    <nav>
+                        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
+                        <button class="btnConnection" onclick="window.location.href='index.php?action=inscription'">Inscription</button>
+                    </nav>
+                    <div>
+                     <p class="inscriptionNo">Erreur lors de l'inscription</p>
+                   </div>
+                HTML;
             }
 
-            
-            
-            
-            
-            
-            
             
         }
         return $html;

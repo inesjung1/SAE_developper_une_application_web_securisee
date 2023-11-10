@@ -44,14 +44,17 @@ public function __construct() {}
             if ($Auth->authentificate($email, $password)) {
                 setcookie('user', $idU, time() + 3600, '/');
                 $html = <<<HTML
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
-                <div class="center-container">
+                <nav>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                </nav>                <div class="center-container">
                     <p class="success-message">Vous êtes bien connecté</p>
                 </div>
             HTML;
             } else {
                 $html = <<<HTML
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <nav>
+                        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    </nav>
                     <p class="success-message">Erreur de connection</p>
                 HTML;
             }

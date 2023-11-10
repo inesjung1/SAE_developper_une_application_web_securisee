@@ -25,7 +25,7 @@ class MesAbonnesAction extends Action
         //On parcourt les éléments de $abonnements
         $html = '';
         $html .= <<<HTML
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                 <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$id'">Mon Profil</button>
         HTML;
         foreach ($abonnements as $abonnement) {

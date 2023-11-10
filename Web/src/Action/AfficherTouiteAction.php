@@ -21,7 +21,7 @@ class AfficherTouiteAction extends Action {
                 <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                 <form action="index.php?action=recherche" method="get">
                     <input class="navi" type="hidden" value="recherche" name="action">
-                    <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche">
+                    <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche #Tag">
                     <input class="entreeButton navi" type="submit" value="Recherche">
                 </form>
         HTML;

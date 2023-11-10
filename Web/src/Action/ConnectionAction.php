@@ -13,7 +13,7 @@ public function __construct() {}
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $html = <<<HTML
             <nav>
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
             </nav>
         <div class="center-container">
             <form action="index.php?action=connection" method="post">
@@ -45,7 +45,7 @@ public function __construct() {}
                 setcookie('user', $idU, time() + 3600, '/');
                 $html = <<<HTML
                 <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                 </nav>                <div class="center-container">
                     <p class="success-message">Vous êtes bien connecté</p>
                 </div>
@@ -53,7 +53,7 @@ public function __construct() {}
             } else {
                 $html = <<<HTML
                     <nav>
-                        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                        <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                     </nav>
                     <p class="error-message">Erreur de connection</p>
                 HTML;

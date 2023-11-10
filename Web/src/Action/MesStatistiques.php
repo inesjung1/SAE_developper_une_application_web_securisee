@@ -36,7 +36,7 @@ class MesStatistiques extends Action
         }else{
             $html .= <<<HTML
                 <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                     <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
                 </nav>
                 <p>Vous n'avez pas encore touité</p>

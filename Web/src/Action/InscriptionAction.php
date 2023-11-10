@@ -52,7 +52,7 @@ class InscriptionAction extends Action {
             if($Auth->register($pseudo, $email, $password,$nom,$prenom)){
                 $html = <<<HTML
                 <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                 </nav>
                 <p>Vous êtes bien inscrit </p>
                 <button class="btnConnection" onclick="window.location.href='index.php?action=connection'">Connection</button>
@@ -60,7 +60,7 @@ class InscriptionAction extends Action {
             }else{
                 $html = <<<HTML
                 <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Accueil</button>
                 </nav>
                 <p>Erreur lors de l'inscription</p>
                 <button class="btnConnection" onclick="window.location.href='index.php?action=inscription'">Inscription</button>

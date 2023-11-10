@@ -102,7 +102,7 @@ class TouiteRenderer implements Renderer{
                     $abonnements = $stmt6->fetchAll();
                     $count = $abonnements[0]['COUNT(*)'];
                     $html .= <<<HTML
-                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">$tag</a></div>
+                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">#$tag</a></div>
                     HTML;
                     //on verifie que l'utilisateur n'est pas deja abonné
                     if($count == 0) {
@@ -164,6 +164,26 @@ class TouiteRenderer implements Renderer{
                 HTML;
                 if (!empty($image)) {
                     $html .= '<img src="' . htmlspecialchars($image) . '" alt="Image du touite" width="150" height="150"/>';
+                }
+                if ($tag != ''){
+                    $sql6 = "SELECT COUNT(*) FROM abonnementtag WHERE AbonneUtilisateurID = $monId AND abonnementtag.TagID = $tagID;";
+                    $stmt6 = $db->prepare($sql6);
+                    $stmt6->execute();
+                    $abonnements = $stmt6->fetchAll();
+                    $count = $abonnements[0]['COUNT(*)'];
+                    $html .= <<<HTML
+                        <div class="touite-tag"><a class="user" href="index.php?action=recherche&recherche=$tag">#$tag</a></div>
+                    HTML;
+                    //on verifie que l'utilisateur n'est pas deja abonné
+                    if($count == 0) {
+                        $html .= <<<HTML
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SabonnerTag&id=$idT&idU=$monId&aaction=$action'">S'abonner</button>
+                        HTML;
+                    }else{
+                        $html .= <<<HTML
+                        <button id="abonnementTag" onclick="window.location.href='index.php?action=SeDesabonnerTag&id=$idT&idU=$monId&aaction=$action'">Se désabonner</button>
+                        HTML;
+                    }
                 }
                 if ($_COOKIE['user']!=0){
                     $html .= <<<HTML

@@ -27,7 +27,7 @@ class MesStatistiques extends Action
             $dislove = $this->recupererDislike();
             $html .= <<<HTML
                 <nav>
-                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                    <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Acceuil</button>
                     <button class="navi" onclick="window.location.href='index.php?action=UtilisateurAction&user=$idU'">Mon Profil</button>
                 </nav>
                 <p class="NbLove">Nombre de Love Moyen : $love</p>

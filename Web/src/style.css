@@ -154,6 +154,19 @@ nav input[type="text"] {
     border-radius: 8px;
 }
 
+#afficher{
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 6px 4px;
+    cursor: pointer;
+    border-radius: 8px;
+}
 #love:hover {
     background-color: darkred;
 }

@@ -23,7 +23,7 @@ class Tendances extends Action
         $idU = $_COOKIE['user'];
         $html = <<<HTML
                 <nav>
-                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Touiter</button>
+                <button class="navi" onclick="window.location.href='index.php?action=DefaultAction'">Acceuil</button>
                 <form action="index.php?action=recherche" method="get">
                     <input class="navi" type="hidden" value="recherche" name="action">
                     <input class="entreeTexte navi" type="text" name="recherche" placeholder="Recherche">
